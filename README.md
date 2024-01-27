@@ -11,7 +11,7 @@ We currently support the following environments:
 
 To get access to our staging environment please contact us.
 
-## Deployment process for production
+## Deployment process
 
 The deployment of infrastructure code or new app versions has to be reviewed by the infrastructure unit.
 
