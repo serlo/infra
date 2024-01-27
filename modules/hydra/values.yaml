@@ -1,0 +1,53 @@
+image:
+  tag: ${image_tag}
+
+ingress:
+  public:
+    enabled: true
+    className: nginx
+    annotations:
+      kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: ${host}
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - ${host}
+        secretName: ${tls_secret_name}
+
+hydra:
+  autoMigrate: true
+
+  config:
+    dsn: ${dsn}
+    oidc:
+      subject_identifiers:
+        supported_types:
+          - pairwise
+        pairwise:
+          salt: ${salt}
+
+    urls:
+      self:
+        issuer: "https://${host}"
+      login: ${url_login}
+      logout: ${url_logout}
+      consent: ${url_consent}
+
+    secrets:
+      system:
+        - ${system_secret}
+
+deployment:
+  nodeSelector:
+    cloud.google.com/gke-nodepool: ${node_pool}
+
+  resources:
+    limits:
+      cpu: 40m
+      memory: 128Mi
+    requests:
+      cpu: 20m
+      memory: 64Mi

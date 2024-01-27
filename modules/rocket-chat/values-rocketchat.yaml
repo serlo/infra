@@ -1,0 +1,24 @@
+image:
+  tag: ${image_tag}
+host: ${host}
+replicaCount: ${app_replicas}.0
+minAvailable: 1
+externalMongodbUrl: ${mongodb_uri}
+externalMongodbOplogUrl: ${mongodb_oplog_uri}
+smtp:
+  enabled: true
+  host: ${smtp_host}
+  port: ${smtp_port}
+  username: ${smtp_username}
+  password: ${smtp_password}
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2000Mi
+  requests:
+    cpu: 750m
+    memory: 1500Mi
+
+mongodb:
+  enabled: false
