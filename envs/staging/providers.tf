@@ -1,0 +1,28 @@
+provider "cloudflare" {
+  api_token = var.cloudflare_token
+}
+
+provider "google" {
+  project     = local.project
+  credentials = file(local.credentials_path)
+}
+
+provider "helm" {
+  kubernetes {
+    host     = module.cluster.endpoint
+    username = ""
+    password = ""
+
+    client_certificate     = base64decode(module.cluster.auth.client_certificate)
+    client_key             = base64decode(module.cluster.auth.client_key)
+    cluster_ca_certificate = base64decode(module.cluster.auth.cluster_ca_certificate)
+  }
+}
+
+provider "kubernetes" {
+  host = "https://${module.cluster.endpoint}"
+
+  client_certificate     = base64decode(module.cluster.auth.client_certificate)
+  client_key             = base64decode(module.cluster.auth.client_key)
+  cluster_ca_certificate = base64decode(module.cluster.auth.cluster_ca_certificate)
+}

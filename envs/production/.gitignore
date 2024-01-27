@@ -1,0 +1,19 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+#ignore secret folder
+secrets/
+
+#ignore tmp folder
+**/tmp
+
+# ides
+.idea
+infrastructure-env-production.iml
