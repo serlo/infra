@@ -14,3 +14,45 @@ jobs:
           terraform_version: ^1.0.0
       - name: Terraform Format
         run: terraform fmt -check -recursive
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        module:
+          - envs/production
+          - envs/staging
+          - modules/api
+          - modules/cloudflare
+          - modules/dbdump
+          - modules/dbsetup
+          - modules/dbsetup
+          - modules/enmeshed
+          - modules/gcloud/cluster
+          - modules/gcloud/gcloud_dbdump_reader
+          - modules/gcloud/gcloud_dbdump_writer
+          - modules/gcloud/gcloud_mysql
+          - modules/gcloud/gcloud_postgres
+          - modules/hydra
+          - modules/ingress
+          - modules/ingress-nginx
+          - modules/kratos
+          - modules/mysql
+          - modules/notification-mail
+          - modules/postgres
+          - modules/redis
+          - modules/rocket-chat
+          - modules/tls-self-signed-cert
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ^1.0.0
+      - name: Terraform Init
+        run: terraform init -backend=false
+        working-directory: ${{ matrix.module }}
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ${{ matrix.module }}
