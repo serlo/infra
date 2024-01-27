@@ -6,8 +6,8 @@ Serlo's infrastructure is based on Terraform, Kubernetes, Google Cloud and Cloud
 
 We currently support the following environments:
 
-1. **https://serlo-staging.dev** (staging environment to test and integrate infrastructure and apps, deployable only by infrastructure unit - https://github.com/serlo/infrastructure-env-staging)
-2. **https://serlo.org** (production environment, deployable only by infrastructure unit - https://github.com/serlo/infrastructure-env-production)
+1. **https://serlo-staging.dev** (staging environment to test and integrate infrastructure and apps)
+2. **https://serlo.org** (production environment)
 
 To get access to our staging environment please contact us.
 
