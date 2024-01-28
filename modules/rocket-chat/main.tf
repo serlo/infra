@@ -35,7 +35,7 @@ resource "helm_release" "rocket-chat_deployment" {
 
 resource "helm_release" "database" {
   name       = "rocket-chat-database"
-  repository = "https://charts.bitnami.com/bitnami"
+  repository = "https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami"
   chart      = "mongodb"
   version    = var.chart_versions.mongodb
   namespace  = var.namespace
