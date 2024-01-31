@@ -23,7 +23,7 @@ def main():
             cursor_factory=psycopg2.extras.RealDictCursor
         )
         postgres_cursor.execute(
-            "SELECT * FROM identities WHERE metadata_public IS NULL"
+            "SELECT * FROM identities WHERE (metadata_public->'legacy_id') is null"
         )
         unsynced_accounts = postgres_cursor.fetchall()
 
@@ -45,11 +45,14 @@ def main():
             )
             kratos_response = None
             if response.status_code == 200:
+                legacy_id = {"legacy_id": response.json()["userId"]}
                 kratos_response = kratos_admin.update_identity(
                     account["id"],
                     update_identity_body={
                         **account,
-                        "metadata_public": {"legacy_id": response.json()["userId"]},
+                        "metadata_public": dict(legacy_id, **account["metadata_public"])
+                        if isinstance(account["metadata_public"], dict)
+                        else legacy_id,
                     },
                 )
             # It handle cases in which the user exists in legacy db
@@ -65,11 +68,14 @@ def main():
                         },
                     },
                 )
+                legacy_id = {"legacy_id": response.json()["id"]}
                 kratos_response = kratos_admin.update_identity(
                     account["id"],
                     update_identity_body={
                         **account,
-                        "metadata_public": {"legacy_id": response.json()["id"]},
+                        "metadata_public": dict(legacy_id, **account["metadata_public"])
+                        if isinstance(account["metadata_public"], dict)
+                        else legacy_id,
                     },
                 )
 
