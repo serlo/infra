@@ -141,6 +141,7 @@ module "server" {
   redis_url                     = var.redis_url
   secrets                       = module.secrets
   sentry_dsn                    = var.server.sentry_dsn
+  serlo_org_database_url        = var.database_layer.database_url
   google_service_account        = var.server.google_service_account
   google_spreadsheet_api        = var.google_spreadsheet_api
   rocket_chat_api               = var.rocket_chat_api
