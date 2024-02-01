@@ -37,6 +37,10 @@ variable "redis_url" {
   type        = string
 }
 
+variable "serlo_org_database_url" {
+  type = string
+}
+
 variable "google_service_account" {
   description = "Google service account key"
   type        = string
@@ -354,6 +358,11 @@ resource "kubernetes_deployment" "server" {
           env {
             name  = "OPENAI_API_KEY"
             value = var.openai_api_key
+          }
+
+          env {
+            name  = "MYSQL_URI"
+            value = var.serlo_org_database_url
           }
 
           volume_mount {
