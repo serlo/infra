@@ -178,6 +178,7 @@ module "swr_queue_worker" {
   mailchimp_api                 = var.mailchimp_api
   serlo_org_database_layer_host = module.database_layer.host
   concurrency                   = var.swr_queue_worker.concurrency
+  serlo_org_database_url        = var.database_layer.database_url
 }
 
 module "api_db_migration" {

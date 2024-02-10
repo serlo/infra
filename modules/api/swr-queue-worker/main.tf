@@ -80,11 +80,14 @@ variable "serlo_org_database_layer_host" {
   type        = string
 }
 
+variable "serlo_org_database_url" {
+  type = string
+}
+
 variable "concurrency" {
   description = "Number of parallel requests"
   type        = number
 }
-
 resource "kubernetes_service" "server" {
   metadata {
     name      = local.name
@@ -235,6 +238,11 @@ resource "kubernetes_deployment" "server" {
           env {
             name  = "SERLO_ORG_SECRET"
             value = var.secrets.serlo_org
+          }
+
+          env {
+            name  = "MYSQL_URI"
+            value = var.serlo_org_database_url
           }
 
           env {
