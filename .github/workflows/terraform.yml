@@ -20,8 +20,6 @@ jobs:
     strategy:
       matrix:
         module:
-          - envs/production
-          - envs/staging
           - modules/api
           - modules/cloudflare
           - modules/dbdump
