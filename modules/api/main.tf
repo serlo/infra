@@ -23,6 +23,10 @@ variable "environment" {
   type        = string
 }
 
+variable "slack_token" {
+  type = string
+}
+
 variable "google_spreadsheet_api" {
   description = "Configuration for Google Spreadsheet API"
   type = object({
@@ -184,14 +188,17 @@ module "swr_queue_worker" {
 module "api_db_migration" {
   source = "./api-db-migration"
 
+  environment       = var.environment
   namespace         = var.namespace
   image_tag         = var.api_db_migration.image_tag
   image_pull_policy = var.image_pull_policy
   node_pool         = var.node_pool
   enable_cronjob    = var.api_db_migration.enable_cronjob
 
-  database_url = var.api_db_migration.database_url
-  redis_url    = var.redis_url
+  database_url  = var.api_db_migration.database_url
+  redis_url     = var.redis_url
+  slack_token   = var.slack_token
+  slack_channel = "C06LH10LNTY"
 }
 
 output "server_service_name" {
