@@ -3,7 +3,7 @@ locals {
     image_tags = {
       database_layer   = "0.3.75"
       server           = "staging"
-      api_db_migration = "0.11.0-staging.2"
+      api_db_migration = "0.11.0-staging.4"
     }
   }
 }
@@ -40,7 +40,8 @@ module "api" {
   mailchimp_api = {
     key = var.athene2_php_newsletter_key
   }
-  redis_url = "redis://redis-master:6379"
+  redis_url   = "redis://redis-master:6379"
+  slack_token = var.slack_token
 
   database_layer = {
     image_tag = local.api.image_tags.database_layer

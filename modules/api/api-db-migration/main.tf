@@ -30,7 +30,19 @@ variable "enable_cronjob" {
   type = bool
 }
 
+variable "environment" {
+  type = string
+}
+
 variable "redis_url" {
+  type = string
+}
+
+variable "slack_channel" {
+  type = string
+}
+
+variable "slack_token" {
   type = string
 }
 
@@ -65,6 +77,11 @@ resource "kubernetes_job" "migration" {
           image_pull_policy = var.image_pull_policy
 
           env {
+            name  = "ENVIRONMENT"
+            value = var.environment
+          }
+
+          env {
             name  = "DATABASE"
             value = var.database_url
           }
@@ -72,6 +89,16 @@ resource "kubernetes_job" "migration" {
           env {
             name  = "REDIS_URL"
             value = var.redis_url
+          }
+
+          env {
+            name  = "SLACK_CHANNEL"
+            value = var.slack_channel
+          }
+
+          env {
+            name  = "SLACK_TOKEN"
+            value = var.slack_token
           }
         }
       }

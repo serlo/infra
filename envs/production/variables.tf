@@ -92,3 +92,8 @@ variable "kratos_nbp_client" {
 variable "openai_api_key" {
   type = string
 }
+
+variable "slack_token" {
+  type      = string
+  sensitive = true
+}

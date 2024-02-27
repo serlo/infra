@@ -106,3 +106,8 @@ variable "enmeshed_api_key" {
 variable "openai_api_key" {
   type = string
 }
+
+variable "slack_token" {
+  type      = string
+  sensitive = true
+}

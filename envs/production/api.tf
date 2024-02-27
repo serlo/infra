@@ -3,7 +3,7 @@ locals {
     image_tags = {
       database_layer   = "0.3.75"
       server           = "production"
-      api_db_migration = "0.10.0"
+      api_db_migration = "0.11.0"
     }
   }
 }
@@ -81,6 +81,8 @@ module "api" {
   swr_queue_worker = {
     concurrency = 2
   }
+
+  slack_token = var.slack_token
 }
 
 module "api_server_ingress" {
