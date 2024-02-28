@@ -139,6 +139,11 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
               image = "eu.gcr.io/serlo-shared/api-db-migration:${var.image_tag}"
 
               env {
+                name  = "ENVIRONMENT"
+                value = var.environment
+              }
+
+              env {
                 name  = "DATABASE"
                 value = var.database_url
               }
@@ -146,6 +151,16 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
               env {
                 name  = "REDIS_URL"
                 value = var.redis_url
+              }
+
+              env {
+                name  = "SLACK_CHANNEL"
+                value = var.slack_channel
+              }
+
+              env {
+                name  = "SLACK_TOKEN"
+                value = var.slack_token
               }
             }
 
