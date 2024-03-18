@@ -40,6 +40,16 @@ module "kratos" {
   newsletter_api_key = var.athene2_php_newsletter_key
 }
 
+module "kratos_sync_accounts" {
+  source = "../../modules/kratos-import-scripts/sync-accounts"
+
+  node_pool = module.cluster.node_pools.non-preemptible
+  namespace = kubernetes_namespace.auth_namespace.metadata.0.name
+  postgres_database = {
+    host     = module.gcloud_postgres.database_private_ip_address
+    password = var.kpi_kpi_database_password_readonly
+  }
+}
 
 resource "kubernetes_namespace" "auth_namespace" {
   metadata {
