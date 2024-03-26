@@ -195,10 +195,11 @@ module "api_db_migration" {
   node_pool         = var.node_pool
   enable_cronjob    = var.api_db_migration.enable_cronjob
 
-  database_url  = var.api_db_migration.database_url
-  redis_url     = var.redis_url
-  slack_token   = var.slack_token
-  slack_channel = "C06LH10LNTY"
+  database_url   = var.api_db_migration.database_url
+  redis_url      = var.redis_url
+  slack_token    = var.slack_token
+  slack_channel  = "C06LH10LNTY"
+  openai_api_key = var.server.openai_api_key
 }
 
 output "server_service_name" {
