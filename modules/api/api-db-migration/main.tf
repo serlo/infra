@@ -46,6 +46,10 @@ variable "slack_token" {
   type = string
 }
 
+variable "openai_api_key" {
+  type = string
+}
+
 resource "kubernetes_job" "migration" {
   metadata {
     name      = local.name
@@ -99,6 +103,10 @@ resource "kubernetes_job" "migration" {
           env {
             name  = "SLACK_TOKEN"
             value = var.slack_token
+          }
+          env {
+            name  = "OPENAI_API_KEY"
+            value = var.openai_api_key
           }
         }
       }
