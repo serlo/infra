@@ -22,7 +22,7 @@ module "api" {
 
   namespace         = kubernetes_namespace.api_namespace.metadata.0.name
   image_tag         = local.api.image_tags.server
-  image_pull_policy = "IfNotPresent"
+  image_pull_policy = "Always"
   node_pool         = module.cluster.node_pools.non-preemptible
 
   environment = "production"
