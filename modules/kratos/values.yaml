@@ -108,18 +108,6 @@ kratos:
           ui_url: https://${domain}/auth/registration
           after:
             hooks:
-              # is not executed for case oidc, so we need it copied there
-              - hook: web_hook
-                config:
-                  url: https://api.${domain}/kratos/register
-                  method: POST
-                  body: base64://${user_id_mapper}
-                  auth:
-                    type: api_key
-                    config:
-                      name: x-kratos-key
-                      value: ${kratos_secret}
-                      in: header
               - hook: web_hook
                 config:
                   url: https://${mailchimp_server}.api.mailchimp.com/3.0/lists/a7bb2bbc4f/members
