@@ -1,9 +1,9 @@
 locals {
   api = {
     image_tags = {
-      database_layer   = "0.3.77"
+      database_layer   = "0.3.78"
       server           = "production"
-      api_db_migration = "0.16.0"
+      api_db_migration = "0.20.1"
     }
   }
 }
@@ -22,7 +22,7 @@ module "api" {
 
   namespace         = kubernetes_namespace.api_namespace.metadata.0.name
   image_tag         = local.api.image_tags.server
-  image_pull_policy = "IfNotPresent"
+  image_pull_policy = "Always"
   node_pool         = module.cluster.node_pools.non-preemptible
 
   environment = "production"
