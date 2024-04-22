@@ -140,12 +140,13 @@ module "server" {
   image_pull_policy = var.image_pull_policy
   node_pool         = var.node_pool
 
-  environment                   = var.environment
-  log_level                     = var.log_level
-  redis_url                     = var.redis_url
-  secrets                       = module.secrets
-  sentry_dsn                    = var.server.sentry_dsn
-  serlo_org_database_url        = var.database_layer.database_url
+  environment = var.environment
+  log_level   = var.log_level
+  redis_url   = var.redis_url
+  secrets     = module.secrets
+  sentry_dsn  = var.server.sentry_dsn
+  # TODO: move the timezone query to the declaration of the variable after removing db layer, see #50
+  serlo_org_database_url        = "${var.database_layer.database_url}?timezone=+00:00"
   google_service_account        = var.server.google_service_account
   google_spreadsheet_api        = var.google_spreadsheet_api
   rocket_chat_api               = var.rocket_chat_api
@@ -182,7 +183,8 @@ module "swr_queue_worker" {
   mailchimp_api                 = var.mailchimp_api
   serlo_org_database_layer_host = module.database_layer.host
   concurrency                   = var.swr_queue_worker.concurrency
-  serlo_org_database_url        = var.database_layer.database_url
+  # TODO: move the timezone query to the declaration of the variable after removing db layer, see #50
+  serlo_org_database_url = "${var.database_layer.database_url}?timezone=+00:00"
 }
 
 module "api_db_migration" {
