@@ -45,7 +45,7 @@ module "api" {
   database_layer = {
     image_tag = local.api.image_tags.database_layer
 
-    database_url                   = "mysql://serlo:${var.athene2_database_password_default}@${module.mysql.database_private_ip_address}:3306/serlo?timezone=+00:00"
+    database_url                   = "mysql://serlo:${var.athene2_database_password_default}@${module.mysql.database_private_ip_address}:3306/serlo"
     database_max_connections       = 25
     sentry_dsn                     = "https://849cde772c90451c807ed96a318a935a@o115070.ingest.sentry.io/5649015"
     metadata_api_last_changes_date = "2023-10-26T15:15:00Z"
