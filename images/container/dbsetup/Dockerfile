@@ -1,6 +1,10 @@
 FROM alpine:3.17.2
 
 RUN apk update && apk add bash curl python3 python3-dev py-pip build-base && rm -rf /var/cache/apk/*
+
+RUN pip3 uninstall crcmod
+RUN pip3 install --no-cache-dir -U crcmod
+
 RUN curl https://sdk.cloud.google.com | bash >/dev/null
 ENV PATH=${PATH}:/root/google-cloud-sdk/bin:/root/google-cloud-sdk/platform/gsutil
 RUN apk update && apk add mysql-client postgresql-client unzip && rm -rf /var/cache/apk/*
