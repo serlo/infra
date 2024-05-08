@@ -37,6 +37,7 @@ module "kratos" {
   image_tag          = local.kratos.image_tag
   domain             = local.domain
   nbp_client         = var.kratos_nbp_client
+  vidis_client       = var.kratos_vidis_client
   newsletter_api_key = var.athene2_php_newsletter_key
 }
 

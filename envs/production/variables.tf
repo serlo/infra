@@ -89,6 +89,13 @@ variable "kratos_nbp_client" {
   })
 }
 
+variable "kratos_vidis_client" {
+  type = object({
+    id     = string
+    secret = string
+  })
+}
+
 variable "openai_api_key" {
   type = string
 }

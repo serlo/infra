@@ -63,6 +63,12 @@ kratos:
                 client_secret: ${nbp_client_secret}
                 issuer_url: https://aai.demo.meinbildungsraum.de/realms/nbp-aai
                 mapper_url: base64://${nbp_user_mapper}
+              - id: vidis
+                provider: generic
+                client_id: ${vidis_client_id}
+                client_secret: ${vidis_client_secret}
+                issuer_url: ${vidis_issuer_url}
+                mapper_url: base64://${vidis_user_mapper}
 
       flows:
         error:
