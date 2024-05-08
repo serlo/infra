@@ -37,6 +37,7 @@ module "kratos" {
   domain             = local.domain
   nbp_client         = var.kratos_nbp_client
   vidis_client       = var.kratos_vidis_client
+  vidis_issuer_url   = "https://aai-test.vidis.schule/auth/realms/vidis"
   newsletter_api_key = var.athene2_php_newsletter_key
 }
 
