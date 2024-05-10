@@ -60,7 +60,7 @@ module "api" {
   }
 
   server = {
-    hydra_host                = module.hydra.admin_uri
+    hydra_host                = ""
     kratos_public_host        = module.kratos.public_uri
     kratos_admin_host         = module.kratos.admin_uri
     kratos_secret             = module.kratos.secret
