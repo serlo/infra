@@ -1,7 +1,7 @@
 locals {
   api = {
     image_tags = {
-      database_layer   = "0.3.78"
+      database_layer   = "0.3.79"
       server           = "staging"
       api_db_migration = "0.22.0-staging.2"
     }
