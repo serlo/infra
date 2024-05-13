@@ -19,7 +19,7 @@ local buildUsername = function(uuid, acronym, firstName, familyName)
     traits: {
       email: claims.sub + '@vidis.schule',
       username: buildUsername(claims.sub, claims.akronym, claims.vorname, claims.nachname),
-      interest: mapRoleToInterest(claims.rolle),
+      interest: if 'rolle' in claims then mapRoleToInterest(claims.rolle) else 'other',
     },
   },
 }
