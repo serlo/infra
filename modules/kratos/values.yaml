@@ -107,7 +107,7 @@ kratos:
                     response:
                       ignore: true
             oidc:
-              default_browser_return_url: https://journey.${domain}/auth/login
+              default_browser_return_url: https://${domain}/auth/login
 
         registration:
           lifespan: 10m
@@ -139,6 +139,7 @@ kratos:
                       user: serlo
                       password: ${newsletter_api_key}
             oidc:
+              default_browser_return_url: https://${domain}/auth/login
               hooks:
                 - hook: web_hook
                   config:
