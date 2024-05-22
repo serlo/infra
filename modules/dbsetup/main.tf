@@ -13,8 +13,10 @@ resource "kubernetes_cron_job_v1" "dbsetup" {
   }
 
   spec {
-    concurrency_policy = "Forbid"
-    schedule           = var.schedule
+    concurrency_policy            = "Forbid"
+    schedule                      = var.schedule
+    successful_jobs_history_limit = 2
+    failed_jobs_history_limit     = 1
     job_template {
       metadata {}
       spec {

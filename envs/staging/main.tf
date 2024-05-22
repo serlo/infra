@@ -77,7 +77,7 @@ module "athene2_dbsetup" {
   image     = "eu.gcr.io/serlo-shared/athene2-dbsetup-cronjob:3.0.3"
   namespace = kubernetes_namespace.api_namespace.metadata.0.name
   node_pool = module.cluster.node_pools.preemptible
-  schedule  = "0 1 * * *"
+  schedule  = "0 2 * * *"
   mysql = {
     host     = module.mysql.database_private_ip_address
     username = "serlo"
