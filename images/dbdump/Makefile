@@ -7,7 +7,7 @@ minor_version=4
 patch_version=1
 version=$(major_version).$(minor_version).$(patch_version)
 
-include ../../mk/dockerci.mk
+include ../docker.mk
 
 .PHONY: docker_build
 docker_build:
