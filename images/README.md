@@ -6,14 +6,16 @@ Infrastructure Images are GC-project independent docker images.
 
 Docker and Make
 
-### Building images
+### Building and pushing images
 
-After changing a specific image, you should build it manually.  
+After changing a specific image, you should build and push it manually.  
 Example:
 
 1. `cd images/dbdump`
 2. Change the version in `images/dbdump/Makefile`
-3. `make docker_build`
+3. `make docker_build_push`
+
+If you want to test the image just locally, use `make docker_build` in the 3rd step.
 
 # Images
 
