@@ -5,29 +5,28 @@ local enshortenUuid(uuid) = std.split(uuid, '-')[0];
 local extractFromClaims = function(fieldName)
   if fieldName in claims then claims[fieldName] else null;
 
-local mapRoleToInterest = function(role)
-  if role == 'LEHR' then 'teacher'
-  else if role == 'LERN' then 'pupil'
-  else 'other';
+local uuid = extractFromClaims('sub');
+
+local buildEmail = function()
+  local email = extractFromClaims('email');
+
+  if email != '' && email != null
+  then email
+  else enshortenUuid(uuid) + '@fakeemail.vidis';
 
 local buildUsername = function()
-  local acronym = extractFromClaims('akronym');
-  local uuid = extractFromClaims('sub');
-  local firstName = extractFromClaims('firstName');
-  local familyName = extractFromClaims('familyName');
+  local preferredUsername = extractFromClaims('preferred_username');
 
-  if acronym != '' && acronym != null then acronym + enshortenUuid(uuid)
-  else if firstName != '' && firstName != null &&
-          familyName != null && familyName != ''
-  then firstName + familyName + enshortenUuid(uuid)
+  if preferredUsername != '' && preferredUsername != null
+  then preferredUsername + '-' + enshortenUuid(uuid)
   else enshortenUuid(uuid);
 
 {
   identity: {
     traits: {
-      email: claims.sub + '@vidis.schule',
+      email: buildEmail(),
       username: buildUsername(),
-      interest: if 'rolle' in claims then mapRoleToInterest(claims.rolle) else 'other',
+      interest: 'other',
     },
   },
 }
