@@ -49,7 +49,7 @@ mysql $mysql_connect -e "LOAD DATA LOCAL INFILE '/tmp/user.csv' INTO TABLE user 
     log_fatal "import of dump failed"
     exit 1
 }
-mysql $mysql_connect -e "UPDATE user SET description = NULL WHERE description = 'NULL'"
+mysql $mysql_connect serlo -e "UPDATE user SET description = NULL WHERE description = 'NULL'"
 
 log_info "imported serlo database dump $newest_dump"
 
