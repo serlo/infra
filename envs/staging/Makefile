@@ -4,5 +4,5 @@ export gcloud_env_name = serlo_staging
 export mysql_instance=10072019-1
 export postgres_instance=10072019-2
 
-include ../../gcloud.mk
-include ../../terraform.mk
+include ../gcloud.mk
+include ../terraform.mk
