@@ -70,15 +70,13 @@ resource "helm_release" "kratos_deployment" {
         domain          = var.domain
         cookie_secret   = random_password.kratos_cookie_secret.result
         kratos_secret   = random_password.secret.result
-        # TODO: remove ternary operators and sso_enabled variable once we want SSO also in production
-        nbp_client_id               = var.nbp_client.id != "" ? var.nbp_client.id : "anything otherwise the yml will be invalid"
-        nbp_client_secret           = var.nbp_client.secret != "" ? var.nbp_client.secret : "anything otherwise the yml will be invalid"
+        nbp_client_id               = var.nbp_client.id
+        nbp_client_secret           = var.nbp_client.secret
         nbp_user_mapper             = base64encode(file("${path.module}/nbp_user_mapper.jsonnet"))
         vidis_client_id             = var.vidis_client.id
         vidis_client_secret         = var.vidis_client.secret
         vidis_issuer_url            = var.vidis_issuer_url
         vidis_user_mapper           = base64encode(file("${path.module}/vidis_user_mapper.jsonnet"))
-        sso_enabled                 = var.nbp_client.secret != "" ? true : false
         identity_schema             = base64encode(file("${path.module}/identity.schema.json"))
         user_id_mapper              = base64encode("function (ctx) { userId: ctx.identity.id }")
         newsletter_api_key          = var.newsletter_api_key
