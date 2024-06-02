@@ -1,27 +1,28 @@
 # Infrastructure for Serlo
 
-## Introduction
+Serlo Infrastructure currently runs on Google Cloud and Cloudflare.
 
-Serlo's infrastructure is based on Terraform, Kubernetes, Google Cloud and Cloudflare.
+## Environments
 
-We currently support the following environments:
+We support the following environments:
 
 1. **https://serlo-staging.dev** (staging environment to test and integrate infrastructure and apps)
 2. **https://serlo.org** (production environment)
 
-To get access to our staging environment please contact us.
+### Requirements
 
-## Deployment process
+Terraform and Kubernetes
 
-The deployment of infrastructure code or new app versions has to be reviewed by the infrastructure unit.
+### Deployment process
 
-Therefore, please open a new **pull request** into main.
+The infrastructure unit deploys the code. As open source contributor, please open a pull request.
 
-# Images
+## Images
 
-Infrastructure Images are GC-project independent docker images.
+- DBDump: a cronjob to save the serlo database as an anonymized dump.
+- DBSetup: cronjob to import the serlo database from the dump.
 
-## Requirements
+### Requirements
 
 Docker and Make
 
@@ -35,13 +36,3 @@ Example:
 3. `make docker_build_push`
 
 If you want to test the image just locally, use `make docker_build` in the 3rd step.
-
-# Images
-
-## DBDump
-
-Builds a cronjob image to save the serlo database as an anonymized dump.
-
-## DBSetup
-
-Builds a cronjob image to import the serlo database from the dump.
