@@ -9,18 +9,17 @@ $(error variable cloudsql_credential_filename not set)
 endif
 
 .PHONY: terraform_init
-terraform_init: 
-	terraform_download_secrets
+terraform_init: terraform_download_secrets
 	terraform get -update
 	terraform init
 
 .PHONY: terraform_plan
-terraform_plan:
+terraform_plan: terraform_download_secrets
 	terraform fmt -recursive
 	terraform plan -var-file secrets/terraform-$(env_name).tfvars
 
 .PHONY: terraform_apply
-terraform_apply:
+terraform_apply: terraform_download_secrets
 	# just make sure we know what we are doing
 	terraform fmt -recursive
 	terraform apply -var-file secrets/terraform-$(env_name).tfvars
