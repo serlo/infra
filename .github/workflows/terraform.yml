@@ -20,10 +20,11 @@ jobs:
     strategy:
       matrix:
         module:
+          - envs/production
+          - envs/staging
           - modules/api
           - modules/cloudflare
           - modules/dbdump
-          - modules/dbsetup
           - modules/dbsetup
           - modules/enmeshed
           - modules/gcloud/cluster
@@ -42,15 +43,19 @@ jobs:
           - modules/rocket-chat
           - modules/tls-self-signed-cert
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ^1.0.0
-      - name: Terraform Init
-        run: terraform init -backend=false
+      - run: terraform init -backend=false
         working-directory: ${{ matrix.module }}
-      - name: Terraform Validate
-        run: terraform validate
+      - name: Create dummy secret files for envs module
+        if: ${{ matrix.module  == 'envs/production' || matrix.module  == 'envs/staging' }}
+        run: |
+          mkdir secrets
+          touch secrets/serlo-production-terraform-af6ce169abd8.json secrets/serlo-org-6bab84a1b1a5.json
+          touch secrets/serlo-staging-terraform-15240e38ec22.json
+        working-directory: ${{ matrix.module }}
+      - run: terraform validate
         working-directory: ${{ matrix.module }}
