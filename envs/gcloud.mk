@@ -6,10 +6,6 @@ ifndef cloudsql_credential_filename
 $(error variable cloudsql_credential_filename not set)
 endif
 
-ifndef gcloud_env_name
-$(error variable env_name not set)
-endif
-
 kubectl_use_context:
 	kubectl config use-context gke_serlo-$(env_name)_europe-west3-a_serlo-$(env_name)-cluster
 

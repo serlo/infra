@@ -2,12 +2,10 @@ ifndef env_name
 $(error variable env_name not set)
 endif
 
+export gcloud_env_name = serlo_$(env_name)
+
 ifndef cloudsql_credential_filename
 $(error variable cloudsql_credential_filename not set)
-endif
-
-ifndef gcloud_env_name
-$(error variable env_name not set)
 endif
 
 .PHONY: terraform_init
