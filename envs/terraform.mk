@@ -30,13 +30,13 @@ terraform_destroy:
 	terraform fmt -recursive
 	terraform destroy -var-file secrets/terraform-$(env_name).tfvars
 
-secrets_path = secrets/terraform-$(env_name).tfvars
-
 .PHONY: terraform_download_secrets
 terraform_download_secrets:
 	#remove secrets and load latest secret from gcloud
 	rm -rf secrets
 	gsutil -m cp -R gs://$(gcloud_env_name)_terraform/secrets/ .
+
+secrets_path = secrets/terraform-$(env_name).tfvars
 
 .PHONY: terraform_upload_tfvars
 terraform_upload_tfvars:
