@@ -10,9 +10,7 @@ endif
 
 .PHONY: terraform_init
 terraform_init: 
-	#remove secrets and load latest secret from gcloud
-	rm -rf secrets
-	gsutil -m cp -R gs://$(gcloud_env_name)_terraform/secrets/ .
+	terraform_download_secrets
 	terraform get -update
 	terraform init
 
@@ -33,3 +31,15 @@ terraform_destroy:
 	terraform fmt -recursive
 	terraform destroy -var-file secrets/terraform-$(env_name).tfvars
 
+secrets_path = secrets/terraform-$(env_name).tfvars
+
+.PHONY: terraform_download_secrets
+terraform_download_secrets:
+	#remove secrets and load latest secret from gcloud
+	rm -rf secrets
+	gsutil -m cp -R gs://$(gcloud_env_name)_terraform/secrets/ .
+
+.PHONY: terraform_upload_tfvars
+terraform_upload_tfvars:
+	@echo You are about to change the terraform secrets of $(env_name) environment, continue? [y/n]
+	@read line; if [ $$line = "y" ]; then gsutil cp $(secrets_path) gs://$(gcloud_env_name)_terraform/$(secrets_path) ; fi
