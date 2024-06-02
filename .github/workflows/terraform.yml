@@ -20,10 +20,11 @@ jobs:
     strategy:
       matrix:
         module:
+          - envs/production
+          - envs/staging
           - modules/api
           - modules/cloudflare
           - modules/dbdump
-          - modules/dbsetup
           - modules/dbsetup
           - modules/enmeshed
           - modules/gcloud/cluster
