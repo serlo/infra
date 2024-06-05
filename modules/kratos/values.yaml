@@ -52,8 +52,7 @@ kratos:
           config:
             base_url: https://${domain}/api/.ory/
         oidc:
-          # TODO: set `enabled` to true once we want it also in production
-          enabled: ${sso_enabled}
+          enabled: true
           config:
             base_redirect_uri: https://${domain}/api/.ory/
             providers:
