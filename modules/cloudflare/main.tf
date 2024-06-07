@@ -123,3 +123,12 @@ resource "cloudflare_record" "cname_enmeshed" {
   type    = "CNAME"
   proxied = true
 }
+
+# editor (Serlo Editor as LTI Tool)
+resource "cloudflare_record" "cname_editor" {
+  zone_id = var.zone_id
+  name    = "editor"
+  value   = var.domain
+  type    = "CNAME"
+  proxied = true
+}
