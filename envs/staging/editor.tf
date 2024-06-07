@@ -12,8 +12,8 @@ module "editor_ingress" {
   namespace = kubernetes_namespace.editor_namespace.metadata.0.name
   host      = "editor.${local.domain}"
   backend = {
-    service_name = "editor"
-    service_port = 80
+    service_name = module.editor.editor_service_name
+    service_port = module.editor.editor_service_port
   }
   enable_tls = true
 }

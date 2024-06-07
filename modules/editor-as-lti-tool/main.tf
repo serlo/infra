@@ -62,7 +62,7 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
 
           env {
             name  = "MONGODB_CONNECTION_URI"
-            value = "mongodb://root:${random_password.mongodb_root_password.result}@mongodb:27017/?authSource=admin&readPreference=primary&ssl=false"
+            value = "mongodb://root:${random_password.mongodb_root_password.result}@editor-mongodb:27017/?authSource=admin&readPreference=primary&ssl=false"
 
           }
         }
