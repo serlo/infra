@@ -1,7 +1,7 @@
 module "editor" {
   source = "../../modules/editor-as-lti-tool"
 
-  namespace = kubernetes_namespace.api_namespace.metadata.0.name
+  namespace = kubernetes_namespace.editor_namespace.metadata.0.name
   node_pool = module.cluster.node_pools.non-preemptible
 }
 
