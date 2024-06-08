@@ -5,18 +5,15 @@ locals {
 }
 
 variable "namespace" {
-  description = "Kubernetes namespace to use"
-  type        = string
+  type = string
 }
 
 variable "image_tag" {
-  description = "Docker image tag to use"
-  type        = string
+  type = string
 }
 
 variable "node_pool" {
-  type        = string
-  description = "Node pool to use"
+  type = string
 }
 
 variable "database_url" {
