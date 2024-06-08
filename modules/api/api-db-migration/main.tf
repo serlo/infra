@@ -130,7 +130,7 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
 
   spec {
     concurrency_policy = "Forbid"
-    schedule           = "0 5 * * *"
+    schedule           = "0 3 * * *"
     job_template {
       metadata {}
       spec {
