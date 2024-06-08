@@ -69,35 +69,11 @@ resource "kubernetes_job" "migration" {
         container {
           image             = "eu.gcr.io/serlo-shared/api-db-migration:${var.image_tag}"
           name              = local.name
-          image_pull_policy = var.image_pull_policy
-          # TODO: use just one var for env vars of job and cronjob
-          env {
-            name  = "ENVIRONMENT"
-            value = var.environment
-          }
-
-          env {
-            name  = "DATABASE"
-            value = var.database_url
-          }
-
-          env {
-            name  = "REDIS_URL"
-            value = var.redis_url
-          }
-
-          env {
-            name  = "SLACK_CHANNEL"
-            value = var.slack_channel
-          }
-
-          env {
-            name  = "SLACK_TOKEN"
-            value = var.slack_token
-          }
-          env {
-            name  = "OPENAI_API_KEY"
-            value = var.openai_api_key
+          image_pull_policy = "Always"
+          env_from {
+            config_map_ref {
+              name = kubernetes_config_map.envvars.metadata.0.name
+            }
           }
         }
       }
@@ -134,37 +110,13 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
             }
 
             container {
-              name  = "db-migration-cronjob"
-              image = "eu.gcr.io/serlo-shared/api-db-migration:${var.image_tag}"
-
-              env {
-                name  = "ENVIRONMENT"
-                value = var.environment
-              }
-
-              env {
-                name  = "DATABASE"
-                value = var.database_url
-              }
-
-              env {
-                name  = "REDIS_URL"
-                value = var.redis_url
-              }
-
-              env {
-                name  = "SLACK_CHANNEL"
-                value = var.slack_channel
-              }
-
-              env {
-                name  = "SLACK_TOKEN"
-                value = var.slack_token
-              }
-
-              env {
-                name  = "OPENAI_API_KEY"
-                value = var.openai_api_key
+              name              = local.name_cronjob
+              image             = local.image
+              image_pull_policy = "Always"
+              env_from {
+                config_map_ref {
+                  name = kubernetes_config_map.envvars.metadata.0.name
+                }
               }
             }
 
@@ -173,5 +125,19 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
         }
       }
     }
+  }
+}
+
+resource "kubernetes_config_map" "envvars" {
+  metadata {
+    name      = local.name
+    namespace = var.namespace
+  }
+  data = {
+    DATABASE       = var.database_url
+    REDIS_URL      = var.redis_url
+    SLACK_CHANNEL  = var.slack_channel
+    SLACK_TOKEN    = var.slack_token
+    OPENAI_API_KEY = var.openai_api_key
   }
 }
