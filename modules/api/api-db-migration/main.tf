@@ -84,7 +84,7 @@ resource "kubernetes_job" "migration" {
 }
 
 resource "kubernetes_cron_job_v1" "migration_cron_job" {
-  count = var.enable_cronjob ? 1 : 0
+  count = var.environment == "staging" ? 1 : 0
 
   metadata {
     name      = local.name_cronjob
