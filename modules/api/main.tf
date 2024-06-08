@@ -104,8 +104,7 @@ variable "database_layer" {
   })
 }
 
-variable "api_db_migration" {
-  description = "Configuration for the API database migration"
+variable "db_migration" {
   type = object({
     image_tag      = string
     database_url   = string
@@ -190,14 +189,12 @@ module "swr_queue_worker" {
 module "api_db_migration" {
   source = "./api-db-migration"
 
-  environment       = var.environment
-  namespace         = var.namespace
-  image_tag         = var.api_db_migration.image_tag
-  image_pull_policy = var.image_pull_policy
-  node_pool         = var.node_pool
-  enable_cronjob    = var.api_db_migration.enable_cronjob
+  environment = var.environment
+  namespace   = var.namespace
+  image_tag   = var.db_migration.image_tag
+  node_pool   = var.node_pool
 
-  database_url   = var.api_db_migration.database_url
+  database_url   = var.db_migration.database_url
   redis_url      = var.redis_url
   slack_token    = var.slack_token
   slack_channel  = "C06LH10LNTY"

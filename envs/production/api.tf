@@ -1,9 +1,9 @@
 locals {
   api = {
     image_tags = {
-      database_layer   = "0.3.79"
-      server           = "production"
-      api_db_migration = "0.21.0"
+      database_layer = "0.3.79"
+      server         = "production"
+      db_migration   = "0.21.0"
     }
   }
 }
@@ -51,9 +51,8 @@ module "api" {
     metadata_api_last_changes_date = "2023-10-26T15:15:00Z"
   }
 
-  api_db_migration = {
-    enable_cronjob = false
-    image_tag      = local.api.image_tags.api_db_migration
+  db_migration = {
+    image_tag = local.api.image_tags.db_migration
 
     database_url = "mysql://serlo:${var.athene2_database_password_default}@${module.mysql.database_private_ip_address}:3306/serlo"
   }

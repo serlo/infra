@@ -1,5 +1,7 @@
 locals {
-  name = "api-db-migration"
+  name         = "db-migration"
+  name_cronjob = "${local.name}-cronjob"
+  image        = "eu.gcr.io/serlo-shared/api-db-migration:${var.image_tag}"
 }
 
 variable "namespace" {
