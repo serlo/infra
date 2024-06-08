@@ -1,5 +1,6 @@
 locals {
-  name = "editor-as-lti-tool"
+  name      = "editor-as-lti-tool"
+  image_tag = var.dev_mode ? "dev" : "latest"
 }
 
 variable "namespace" {
@@ -8,6 +9,10 @@ variable "namespace" {
 
 variable "node_pool" {
   type = string
+}
+
+variable "dev_mode" {
+  type = bool
 }
 
 output "editor_service_name" {
@@ -51,7 +56,7 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
         }
 
         container {
-          image             = "eu.gcr.io/serlo-shared/editor-as-lti-tool:dev"
+          image             = "eu.gcr.io/serlo-shared/editor-as-lti-tool:${local.image_tag}"
           name              = local.name
           image_pull_policy = "Always"
 

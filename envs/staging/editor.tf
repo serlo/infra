@@ -3,6 +3,8 @@ module "editor" {
 
   namespace = kubernetes_namespace.editor_namespace.metadata.0.name
   node_pool = module.cluster.node_pools.non-preemptible
+
+  dev_mode = true
 }
 
 module "editor_ingress" {
