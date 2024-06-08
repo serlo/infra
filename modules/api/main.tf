@@ -184,7 +184,7 @@ module "swr_queue_worker" {
 }
 
 module "api_db_migration" {
-  source = "./api-db-migration"
+  source = "./db-migration"
 
   environment = var.environment
   namespace   = var.namespace
