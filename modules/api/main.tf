@@ -86,14 +86,12 @@ variable "server" {
 }
 
 variable "swr_queue_worker" {
-  description = "Configuration for SWR Queue worker"
   type = object({
     concurrency = number
   })
 }
 
 variable "database_layer" {
-  description = "Configuration for Database Layer"
   type = object({
     image_tag = string
 
@@ -106,9 +104,8 @@ variable "database_layer" {
 
 variable "db_migration" {
   type = object({
-    image_tag      = string
-    database_url   = string
-    enable_cronjob = bool
+    image_tag    = string
+    database_url = string
   })
 }
 

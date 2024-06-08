@@ -14,11 +14,6 @@ variable "image_tag" {
   type        = string
 }
 
-variable "image_pull_policy" {
-  description = "image pull policy"
-  type        = string
-}
-
 variable "node_pool" {
   type        = string
   description = "Node pool to use"
@@ -26,10 +21,6 @@ variable "node_pool" {
 
 variable "database_url" {
   type = string
-}
-
-variable "enable_cronjob" {
-  type = bool
 }
 
 variable "environment" {
