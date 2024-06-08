@@ -67,7 +67,7 @@ resource "kubernetes_job" "migration" {
         }
 
         container {
-          image             = "eu.gcr.io/serlo-shared/api-db-migration:${var.image_tag}"
+          image             = local.image
           name              = local.name
           image_pull_policy = "Always"
           env_from {
@@ -87,11 +87,11 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
   count = var.enable_cronjob ? 1 : 0
 
   metadata {
-    name      = "db-migration-cronjob"
+    name      = local.name_cronjob
     namespace = var.namespace
 
     labels = {
-      app = local.name
+      app = local.name_cronjob
     }
   }
 
