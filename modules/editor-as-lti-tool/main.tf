@@ -77,29 +77,29 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
             value = "mongodb://root:${random_password.mongodb_root_password.result}@${helm_release.database.name}:27017/?authSource=admin&readPreference=primary&ssl=false"
           }
           env {
-              name  = "LTI_PLATFORM_URL"
-              value = local.lti_platform_url
-            }
+            name  = "LTI_PLATFORM_URL"
+            value = local.lti_platform_url
+          }
           env {
-              name  = "LTI_PLATFORM_NAME"
-              value = "itslearning.com"
-            }
+            name  = "LTI_PLATFORM_NAME"
+            value = "itslearning.com"
+          }
           env {
-              name  = "LTI_PLATFORM_CLIENT_ID"
-              value = var.lti_platform_client_id
-            }
+            name  = "LTI_PLATFORM_CLIENT_ID"
+            value = var.lti_platform_client_id
+          }
           env {
-              name  = "LTI_PLATFORM_AUTHENTICATION_ENDPOINT"
-              value = "${local.lti_platform_url}/connect/authorize"
-            }
+            name  = "LTI_PLATFORM_AUTHENTICATION_ENDPOINT"
+            value = "${local.lti_platform_url}/connect/authorize"
+          }
           env {
-              name  = "LTI_PLATFORM_ACCESS_TOKEN_ENDPOINT"
-              value = "${local.lti_platform_url}/connect/token"
-            }
+            name  = "LTI_PLATFORM_ACCESS_TOKEN_ENDPOINT"
+            value = "${local.lti_platform_url}/connect/token"
+          }
           env {
-              name  = "LTI_PLATFORM_KEYSET_ENDPOINT"
-              value = "${local.lti_platform_url}/.well-known/openid-configuration/jwks"
-            }
+            name  = "LTI_PLATFORM_KEYSET_ENDPOINT"
+            value = "${local.lti_platform_url}/.well-known/openid-configuration/jwks"
+          }
         }
       }
     }
