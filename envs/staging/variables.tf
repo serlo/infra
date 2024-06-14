@@ -118,3 +118,7 @@ variable "slack_token" {
   type      = string
   sensitive = true
 }
+
+variable "editor_lti_platform_client_id" {
+  type = string
+}
