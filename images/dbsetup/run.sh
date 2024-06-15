@@ -17,9 +17,6 @@ until mysql $mysql_connect -e "SHOW DATABASES" >/dev/null 2>/dev/null; do
     sleep 10
 done
 
-log_info "create serlo database if it's not there yet"
-mysql $mysql_connect -e "CREATE DATABASE IF NOT EXISTS serlo"
-
 [ -z "GCLOUD_BUCKET_URL" ] && {
     log_fatal "GCLOUD_BUCKET_URL not given"
     exit 1
@@ -41,6 +38,11 @@ unzip -o "/tmp/$newest_dump" -d /tmp || {
     log_fatal "unzip of dump file failed"
     exit 1
 }
+
+log_info "Recreating serlo database"
+mysql $mysql_connect -e "DROP DATABASE serlo"
+mysql $mysql_connect -e "CREATE DATABASE serlo"
+
 mysql $mysql_connect serlo <"/tmp/mysql.sql" || {
     log_fatal "import of dump failed"
     exit 1
