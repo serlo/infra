@@ -5,6 +5,8 @@ module "editor" {
   node_pool = module.cluster.node_pools.non-preemptible
 
   dev_mode = true
+
+  lti_platform_client_id = var.editor_lti_platform_client_id
 }
 
 module "editor_ingress" {
