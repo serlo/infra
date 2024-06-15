@@ -3,7 +3,7 @@ local_image=serlo/$(image_name)
 
 major_version=3
 minor_version=1
-patch_version=1
+patch_version=2
 version=$(major_version).$(minor_version).$(patch_version)
 
 include ../docker.mk
