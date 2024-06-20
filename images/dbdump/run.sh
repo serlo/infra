@@ -19,7 +19,7 @@ set -e
 log_info "dump serlo.org database - start"
 log_info "dump legacy serlo database schema"
 
-mysqldump $mysql_connect --no-data --lock-tables=false --add-drop-database serlo >mysql.sql
+mysqldump $mysql_connect --no-data --lock-tables=false --add-drop-database --databases serlo >mysql.sql
 
 mysqldump $mysql_connect --no-create-info --lock-tables=false --add-locks --ignore-table=serlo.user serlo >>mysql.sql
 
