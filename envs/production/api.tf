@@ -69,12 +69,13 @@ module "api" {
       username = var.api_swr_queue_dashboard_username
       password = var.api_swr_queue_dashboard_password
     }
-    google_service_account  = file("secrets/serlo-org-6bab84a1b1a5.json")
-    sentry_dsn              = "https://dd6355782e894e048723194b237baa39@o115070.ingest.sentry.io/5385534"
-    enmeshed_server_host    = ""
-    enmeshed_server_secret  = ""
-    enmeshed_webhook_secret = ""
-    openai_api_key          = var.openai_api_key
+    google_service_account      = file("secrets/serlo-org-6bab84a1b1a5.json")
+    sentry_dsn                  = "https://dd6355782e894e048723194b237baa39@o115070.ingest.sentry.io/5385534"
+    enmeshed_server_host        = ""
+    enmeshed_server_secret      = ""
+    enmeshed_webhook_secret     = ""
+    openai_api_key              = var.openai_api_key
+    serlo_editor_testing_secret = var.serlo_editor_testing_secret
   }
 
   swr_queue_worker = {

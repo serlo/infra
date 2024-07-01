@@ -77,11 +77,12 @@ variable "server" {
       username = string
       password = string
     })
-    sentry_dsn              = string
-    enmeshed_server_host    = string
-    enmeshed_server_secret  = string
-    enmeshed_webhook_secret = string
-    openai_api_key          = string
+    sentry_dsn                  = string
+    enmeshed_server_host        = string
+    enmeshed_server_secret      = string
+    enmeshed_webhook_secret     = string
+    openai_api_key              = string
+    serlo_editor_testing_secret = string
   })
 }
 
@@ -159,6 +160,7 @@ module "server" {
   enmeshed_server_host          = var.server.enmeshed_server_host
   enmeshed_server_secret        = var.server.enmeshed_server_secret
   enmeshed_webhook_secret       = var.server.enmeshed_webhook_secret
+  serlo_editor_testing_secret   = var.server.serlo_editor_testing_secret
 }
 
 module "swr_queue_worker" {

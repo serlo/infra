@@ -104,3 +104,7 @@ variable "slack_token" {
   type      = string
   sensitive = true
 }
+
+variable "serlo_editor_testing_secret" {
+  type = string
+}
