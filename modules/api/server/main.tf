@@ -137,6 +137,10 @@ variable "enmeshed_webhook_secret" {
   type = string
 }
 
+variable "serlo_editor_testing_secret" {
+  type = string
+}
+
 resource "kubernetes_service" "server" {
   metadata {
     name      = local.name
@@ -363,6 +367,11 @@ resource "kubernetes_deployment" "server" {
           env {
             name  = "MYSQL_URI"
             value = var.serlo_org_database_url
+          }
+
+          env {
+            name  = "SERVER_SERLO_EDITOR_TESTING_SECRET"
+            value = var.serlo_editor_testing_secret
           }
 
           volume_mount {

@@ -122,3 +122,7 @@ variable "slack_token" {
 variable "editor_lti_platform_client_id" {
   type = string
 }
+
+variable "serlo_editor_testing_secret" {
+  type = string
+}
