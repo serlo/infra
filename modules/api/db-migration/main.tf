@@ -131,7 +131,8 @@ resource "kubernetes_config_map" "envvars" {
     namespace = var.namespace
   }
   data = {
-    DATABASE       = var.database_url
+    ENVIRONMENT    = var.environment
+    MYSQL_URI      = var.database_url
     REDIS_URL      = var.redis_url
     SLACK_CHANNEL  = var.slack_channel
     SLACK_TOKEN    = var.slack_token
