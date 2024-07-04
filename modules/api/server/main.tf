@@ -42,8 +42,8 @@ variable "serlo_org_database_url" {
 }
 
 variable "google_service_account" {
-  type        = string
-  sensitive   = true
+  type      = string
+  sensitive = true
 }
 
 variable "secrets" {
