@@ -18,6 +18,10 @@ variable "dev_mode" {
   type = bool
 }
 
+variable "mysql_database_url" {
+  type = string
+}
+
 variable "lti_platform_client_id" {
   type = string
 }
@@ -75,6 +79,10 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
           env {
             name  = "MONGODB_CONNECTION_URI"
             value = "mongodb://root:${random_password.mongodb_root_password.result}@${helm_release.database.name}:27017/?authSource=admin&readPreference=primary&ssl=false"
+          }
+          env {
+            name  = "MYSQL_URI"
+            value = var.mysql_database_url
           }
           env {
             name  = "LTI_PLATFORM_URL"
