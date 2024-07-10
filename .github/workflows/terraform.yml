@@ -37,7 +37,6 @@ jobs:
           - modules/ingress-nginx
           - modules/kratos
           - modules/mysql
-          - modules/notification-mail
           - modules/postgres
           - modules/redis
           - modules/rocket-chat
