@@ -26,6 +26,10 @@ variable "lti_platform_client_id" {
   type = string
 }
 
+variable "serlo_editor_testing_secret" {
+  type = string
+}
+
 output "editor_service_name" {
   value = kubernetes_service.editor_service.metadata[0].name
 }
@@ -107,6 +111,10 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
           env {
             name  = "LTI_PLATFORM_KEYSET_ENDPOINT"
             value = "${local.lti_platform_url}/.well-known/openid-configuration/jwks"
+          }
+          env {
+            name  = "SERLO_EDITOR_TESTING_SECRET"
+            value = var.serlo_editor_testing_secret
           }
         }
       }
