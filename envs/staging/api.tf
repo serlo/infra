@@ -59,12 +59,11 @@ module "api" {
   }
 
   server = {
-    hydra_host                = ""
-    kratos_public_host        = module.kratos.public_uri
-    kratos_admin_host         = module.kratos.admin_uri
-    kratos_secret             = module.kratos.secret
-    kratos_db_uri             = "postgres://${local.postgres_database_username_default}:${var.kpi_kpi_database_password_default}@${module.gcloud_postgres.database_private_ip_address}/kratos"
-    notification_email_secret = "we do not need this for staging"
+    hydra_host         = ""
+    kratos_public_host = module.kratos.public_uri
+    kratos_admin_host  = module.kratos.admin_uri
+    kratos_secret      = module.kratos.secret
+    kratos_db_uri      = "postgres://${local.postgres_database_username_default}:${var.kpi_kpi_database_password_default}@${module.gcloud_postgres.database_private_ip_address}/kratos"
     swr_queue_dashboard = {
       username = var.api_swr_queue_dashboard_username
       password = var.api_swr_queue_dashboard_password

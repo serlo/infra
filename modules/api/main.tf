@@ -66,13 +66,12 @@ variable "redis_url" {
 variable "server" {
   description = "Configuration for server"
   type = object({
-    hydra_host                = string
-    kratos_public_host        = string
-    kratos_admin_host         = string
-    kratos_secret             = string
-    kratos_db_uri             = string
-    google_service_account    = string
-    notification_email_secret = string
+    hydra_host             = string
+    kratos_public_host     = string
+    kratos_admin_host      = string
+    kratos_secret          = string
+    kratos_db_uri          = string
+    google_service_account = string
     swr_queue_dashboard = object({
       username = string
       password = string
@@ -156,7 +155,6 @@ module "server" {
   serlo_org_database_layer_host = module.database_layer.host
   openai_api_key                = var.server.openai_api_key
   swr_queue_dashboard           = var.server.swr_queue_dashboard
-  notification_email_secret     = var.server.notification_email_secret
   enmeshed_server_host          = var.server.enmeshed_server_host
   enmeshed_server_secret        = var.server.enmeshed_server_secret
   enmeshed_webhook_secret       = var.server.enmeshed_webhook_secret
