@@ -66,12 +66,12 @@ variable "redis_url" {
 variable "server" {
   description = "Configuration for server"
   type = object({
-    hydra_host                = string
-    kratos_public_host        = string
-    kratos_admin_host         = string
-    kratos_secret             = string
-    kratos_db_uri             = string
-    google_service_account    = string
+    hydra_host             = string
+    kratos_public_host     = string
+    kratos_admin_host      = string
+    kratos_secret          = string
+    kratos_db_uri          = string
+    google_service_account = string
     swr_queue_dashboard = object({
       username = string
       password = string
