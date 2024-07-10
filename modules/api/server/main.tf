@@ -104,10 +104,6 @@ variable "kratos_db_uri" {
   type = string
 }
 
-variable "serlo_org_database_layer_host" {
-  type = string
-}
-
 variable "openai_api_key" {
   type = string
 }
@@ -279,11 +275,6 @@ resource "kubernetes_deployment" "server" {
           env {
             name  = "SENTRY_RELEASE"
             value = var.image_tag
-          }
-
-          env {
-            name  = "SERLO_ORG_DATABASE_LAYER_HOST"
-            value = var.serlo_org_database_layer_host
           }
 
           env {

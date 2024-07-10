@@ -63,6 +63,10 @@ variable "redis_url" {
   type        = string
 }
 
+variable "serlo_org_database_url" {
+  type = string
+}
+
 variable "server" {
   description = "Configuration for server"
   type = object({
@@ -91,17 +95,6 @@ variable "swr_queue_worker" {
   })
 }
 
-variable "database_layer" {
-  type = object({
-    image_tag = string
-
-    database_url                   = string
-    database_max_connections       = number
-    sentry_dsn                     = string
-    metadata_api_last_changes_date = string
-  })
-}
-
 variable "db_migration" {
   type = object({
     image_tag    = string
@@ -113,21 +106,6 @@ module "secrets" {
   source = "./secrets"
 }
 
-module "database_layer" {
-  source = "./database-layer"
-
-  namespace         = var.namespace
-  image_tag         = var.database_layer.image_tag
-  image_pull_policy = var.image_pull_policy
-  node_pool         = var.node_pool
-
-  environment                    = var.environment
-  sentry_dsn                     = var.database_layer.sentry_dsn
-  serlo_org_database_url         = var.database_layer.database_url
-  database_max_connections       = var.database_layer.database_max_connections
-  metadata_api_last_changes_date = var.database_layer.metadata_api_last_changes_date
-}
-
 module "server" {
   source = "./server"
 
@@ -136,29 +114,27 @@ module "server" {
   image_pull_policy = var.image_pull_policy
   node_pool         = var.node_pool
 
-  environment = var.environment
-  log_level   = var.log_level
-  redis_url   = var.redis_url
-  secrets     = module.secrets
-  sentry_dsn  = var.server.sentry_dsn
-  # TODO: move the timezone query to the declaration of the variable after removing db layer, see #50
-  serlo_org_database_url        = "${var.database_layer.database_url}?timezone=+00:00"
-  google_service_account        = var.server.google_service_account
-  google_spreadsheet_api        = var.google_spreadsheet_api
-  rocket_chat_api               = var.rocket_chat_api
-  mailchimp_api                 = var.mailchimp_api
-  hydra_host                    = var.server.hydra_host
-  kratos_public_host            = var.server.kratos_public_host
-  kratos_admin_host             = var.server.kratos_admin_host
-  kratos_secret                 = var.server.kratos_secret
-  kratos_db_uri                 = var.server.kratos_db_uri
-  serlo_org_database_layer_host = module.database_layer.host
-  openai_api_key                = var.server.openai_api_key
-  swr_queue_dashboard           = var.server.swr_queue_dashboard
-  enmeshed_server_host          = var.server.enmeshed_server_host
-  enmeshed_server_secret        = var.server.enmeshed_server_secret
-  enmeshed_webhook_secret       = var.server.enmeshed_webhook_secret
-  serlo_editor_testing_secret   = var.server.serlo_editor_testing_secret
+  environment                 = var.environment
+  log_level                   = var.log_level
+  redis_url                   = var.redis_url
+  secrets                     = module.secrets
+  sentry_dsn                  = var.server.sentry_dsn
+  serlo_org_database_url      = var.serlo_org_database_url
+  google_service_account      = var.server.google_service_account
+  google_spreadsheet_api      = var.google_spreadsheet_api
+  rocket_chat_api             = var.rocket_chat_api
+  mailchimp_api               = var.mailchimp_api
+  hydra_host                  = var.server.hydra_host
+  kratos_public_host          = var.server.kratos_public_host
+  kratos_admin_host           = var.server.kratos_admin_host
+  kratos_secret               = var.server.kratos_secret
+  kratos_db_uri               = var.server.kratos_db_uri
+  openai_api_key              = var.server.openai_api_key
+  swr_queue_dashboard         = var.server.swr_queue_dashboard
+  enmeshed_server_host        = var.server.enmeshed_server_host
+  enmeshed_server_secret      = var.server.enmeshed_server_secret
+  enmeshed_webhook_secret     = var.server.enmeshed_webhook_secret
+  serlo_editor_testing_secret = var.server.serlo_editor_testing_secret
 }
 
 module "swr_queue_worker" {
@@ -169,18 +145,17 @@ module "swr_queue_worker" {
   image_pull_policy = var.image_pull_policy
   node_pool         = var.node_pool
 
-  environment                   = var.environment
-  log_level                     = var.log_level
-  redis_url                     = var.redis_url
-  secrets                       = module.secrets
-  sentry_dsn                    = var.server.sentry_dsn
-  google_spreadsheet_api        = var.google_spreadsheet_api
-  rocket_chat_api               = var.rocket_chat_api
-  mailchimp_api                 = var.mailchimp_api
-  serlo_org_database_layer_host = module.database_layer.host
-  concurrency                   = var.swr_queue_worker.concurrency
-  # TODO: move the timezone query to the declaration of the variable after removing db layer, see #50
-  serlo_org_database_url = "${var.database_layer.database_url}?timezone=+00:00"
+  environment            = var.environment
+  log_level              = var.log_level
+  redis_url              = var.redis_url
+  secrets                = module.secrets
+  sentry_dsn             = var.server.sentry_dsn
+  google_spreadsheet_api = var.google_spreadsheet_api
+  rocket_chat_api        = var.rocket_chat_api
+  mailchimp_api          = var.mailchimp_api
+  concurrency            = var.swr_queue_worker.concurrency
+  serlo_org_database_url = var.serlo_org_database_url
+
 }
 
 module "api_db_migration" {
