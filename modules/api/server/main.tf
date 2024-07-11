@@ -222,6 +222,12 @@ resource "kubernetes_deployment" "server" {
             value = var.environment
           }
 
+
+          env {
+            name  = "CACHE_TYPE"
+            value = var.environment == "staging" ? "empty" : ""
+          }
+
           env {
             name  = "GOOGLE_SPREADSHEET_API_ACTIVE_DONORS"
             value = var.google_spreadsheet_api.active_donors
