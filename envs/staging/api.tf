@@ -2,7 +2,7 @@ locals {
   api = {
     image_tags = {
       server           = "staging"
-      api_db_migration = "1.2.0-staging.0"
+      api_db_migration = "1.2.0-staging.1"
     }
   }
 }
