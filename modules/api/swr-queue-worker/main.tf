@@ -75,11 +75,6 @@ variable "mailchimp_api" {
   })
 }
 
-variable "serlo_org_database_layer_host" {
-  description = "Host of database layer"
-  type        = string
-}
-
 variable "serlo_org_database_url" {
   type = string
 }
@@ -228,11 +223,6 @@ resource "kubernetes_deployment" "server" {
           env {
             name  = "SENTRY_RELEASE"
             value = var.image_tag
-          }
-
-          env {
-            name  = "SERLO_ORG_DATABASE_LAYER_HOST"
-            value = var.serlo_org_database_layer_host
           }
 
           env {

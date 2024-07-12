@@ -1,9 +1,8 @@
 locals {
   api = {
     image_tags = {
-      database_layer   = "0.3.80-staging.0"
       server           = "staging"
-      api_db_migration = "1.2.0-staging.0"
+      api_db_migration = "1.2.0-staging.1"
     }
   }
 }
@@ -27,6 +26,8 @@ module "api" {
 
   environment = "staging"
 
+  serlo_org_database_url = "mysql://serlo:${var.athene2_database_password_default}@${module.mysql.database_private_ip_address}:3306/serlo?timezone=+00:00"
+
   google_spreadsheet_api = {
     active_donors = var.api_active_donors_google_spreadsheet_id
     motivation    = var.api_motivation_google_spreadsheet_id
@@ -42,15 +43,6 @@ module "api" {
   }
   redis_url   = "redis://redis-master:6379"
   slack_token = var.slack_token
-
-  database_layer = {
-    image_tag = local.api.image_tags.database_layer
-
-    database_url                   = "mysql://serlo:${var.athene2_database_password_default}@${module.mysql.database_private_ip_address}:3306/serlo"
-    database_max_connections       = 25
-    sentry_dsn                     = "https://849cde772c90451c807ed96a318a935a@o115070.ingest.sentry.io/5649015"
-    metadata_api_last_changes_date = "2023-06-19T12:00:00Z"
-  }
 
   db_migration = {
     image_tag = local.api.image_tags.api_db_migration
