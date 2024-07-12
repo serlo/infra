@@ -10,8 +10,8 @@ locals {
 module "api_redis" {
   source = "../../modules/redis"
 
-  namespace     = kubernetes_namespace.api_namespace.metadata.0.name
-  node_pool     = module.cluster.node_pools.non-preemptible
+  namespace = kubernetes_namespace.api_namespace.metadata.0.name
+  node_pool = module.cluster.node_pools.non-preemptible
 }
 
 module "api" {
