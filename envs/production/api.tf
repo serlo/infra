@@ -11,8 +11,6 @@ module "api_redis" {
   source = "../../modules/redis"
 
   namespace     = kubernetes_namespace.api_namespace.metadata.0.name
-  chart_version = "12.6.2"
-  image_tag     = "6.0.10"
   node_pool     = module.cluster.node_pools.non-preemptible
 }
 
