@@ -1,58 +1,26 @@
+
 resource "helm_release" "redis" {
   name       = "redis"
-  repository = "https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami"
+  repository = "https://charts.bitnami.com/bitnami"
   chart      = "redis"
-  version    = var.chart_version
+  version    = "19.6.1"
   namespace  = var.namespace
-  atomic     = true
 
-  set {
-    name  = "image.tag"
-    value = var.image_tag
-  }
+  values = [
+    templatefile(
+      "${path.module}/values.yml",
+      {
+        node_pool = var.node_pool
+      }
+    )
+  ]
+}
 
-  set {
-    name  = "master.nodeSelector.cloud\\.google\\.com/gke-nodepool"
-    value = var.node_pool
-  }
 
-  set {
-    name  = "replica.nodeSelector.cloud\\.google\\.com/gke-nodepool"
-    value = var.node_pool
-  }
+variable "namespace" {
+  type = string
+}
 
-  set {
-    name  = "cluster.enabled"
-    value = true
-  }
-
-  set {
-    name  = "cluster.slaveCount"
-    value = 0
-  }
-
-  set {
-    name  = "usePassword"
-    value = false
-  }
-
-  set {
-    name  = "master.resources.limits.cpu"
-    value = "350m"
-  }
-
-  set {
-    name  = "master.resources.limits.memory"
-    value = "1Gi"
-  }
-
-  set {
-    name  = "master.resources.requests.cpu"
-    value = "200m"
-  }
-
-  set {
-    name  = "master.resources.requests.memory"
-    value = "500Mi"
-  }
+variable "node_pool" {
+  type = string
 }

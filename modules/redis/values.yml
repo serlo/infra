@@ -1,0 +1,29 @@
+auth:
+  enabled: false
+
+master:
+  persistence:
+    size: 10Gi
+  nodeSelector:
+    "cloud.google.com/gke-nodepool": ${node_pool}
+  resources:
+    requests:
+      cpu: 200m
+      memory: 500Mi
+    limits:
+      cpu: 350m
+      memory: 1Gi
+
+replica:
+  replicaCount: 1
+  persistence:
+    size: 10Gi
+  nodeSelector:
+    "cloud.google.com/gke-nodepool": ${node_pool}
+  resources:
+    requests:
+      cpu: 200m
+      memory: 500Mi
+    limits:
+      cpu: 350m
+      memory: 1Gi
