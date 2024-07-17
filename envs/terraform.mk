@@ -19,7 +19,10 @@ terraform_plan: terraform_download_secrets
 	terraform plan -var-file secrets/terraform-$(env_name).tfvars
 
 .PHONY: terraform_apply
-terraform_apply: terraform_download_secrets
+terraform_apply: terraform_download_secrets terraform_apply_without_downloading_secrets
+
+.PHONY: terraform_apply_without_downloading_secrets
+terraform_apply_without_downloading_secrets:
 	# just make sure we know what we are doing
 	terraform fmt -recursive
 	terraform apply -var-file secrets/terraform-$(env_name).tfvars

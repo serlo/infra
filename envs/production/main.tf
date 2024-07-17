@@ -1,6 +1,3 @@
-#####################################################################
-# settings for production
-#####################################################################
 locals {
   domain  = "serlo.org"
   project = "serlo-production"
@@ -17,9 +14,6 @@ locals {
   kpi_database_instance_name   = "${local.project}-postgres-2020-01-26"
 }
 
-#####################################################################
-# modules
-#####################################################################
 module "cluster" {
   source   = "../../modules/gcloud/cluster"
   name     = "${local.project}-cluster"
