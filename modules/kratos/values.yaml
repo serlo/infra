@@ -21,9 +21,6 @@ kratos:
   autoMigrate: true
 
   config:
-    log:
-      leak_sensitive_values: true
-
     dsn: ${dsn}
 
     serve:
