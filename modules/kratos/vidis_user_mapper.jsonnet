@@ -24,14 +24,14 @@ local buildUsername = function()
 local checkIfIsTeacher = function()
   local rawClaims = extractFromClaims('raw_claims');
   
-  if 'rolle' in rawClaims then rawClaims['rolle'] == 'LEHR' else false;
+  if 'rolle' in rawClaims then rawClaims['rolle'] != 'LEHR' else false;
 
-{
-  identity: if checkIfIsTeacher() then {
+if checkIfIsTeacher() then {
+  identity: {
     traits: {
       email: buildEmail(),
       username: buildUsername(),
       interest: 'other',
     },
-  } else error std.format("ERR_BAD_ROLE"),
-}
+  },
+} else error "ERR_BAD_ROLE"
