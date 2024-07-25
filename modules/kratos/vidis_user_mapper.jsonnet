@@ -24,7 +24,7 @@ local buildUsername = function()
 local checkIfIsTeacher = function()
   local rawClaims = extractFromClaims('raw_claims');
   
-  if 'rolle' in rawClaims then rawClaims['rolle'] != 'LEHR' else false;
+  if 'rolle' in rawClaims then rawClaims['rolle'] == 'LEHR' else false;
 
 if checkIfIsTeacher() then {
   identity: {
