@@ -21,7 +21,12 @@ local buildUsername = function()
   then preferredUsername + '-' + enshortenUuid(uuid)
   else enshortenUuid(uuid);
 
-{
+local checkIfIsTeacher = function()
+  local rawClaims = extractFromClaims('raw_claims');
+  
+  if 'rolle' in rawClaims then rawClaims['rolle'] == 'LEHR' else false;
+
+if checkIfIsTeacher() then {
   identity: {
     traits: {
       email: buildEmail(),
@@ -29,4 +34,4 @@ local buildUsername = function()
       interest: 'other',
     },
   },
-}
+} else error "ERR_BAD_ROLE"
