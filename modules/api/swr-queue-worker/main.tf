@@ -151,7 +151,7 @@ resource "kubernetes_deployment" "server" {
         }
 
         container {
-          image             = "eu.gcr.io/serlo-shared/api-swr-queue-worker:${var.image_tag}"
+          image             = "ghcr.io/serlo/api.serlo.org/swr-queue-worker:${var.image_tag}"
           name              = local.name
           image_pull_policy = var.image_pull_policy
 
