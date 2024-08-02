@@ -77,7 +77,7 @@ module "athene2-dbdump" {
     password = var.kpi_kpi_database_password_readonly
   }
   bucket = {
-    url                 = "gs://anonymous-data"
+    url                 = "gs://anonymous-dump"
     service_account_key = module.gcloud_dbdump_writer.account_key
   }
 }

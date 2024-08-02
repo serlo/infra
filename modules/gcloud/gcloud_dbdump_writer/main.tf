@@ -8,7 +8,7 @@ resource "google_service_account_key" "dbdump_writer_key" {
 }
 
 resource "google_storage_bucket_iam_binding" "dbdump_writer_binding" {
-  bucket = "anonymous-data"
+  bucket = "anonymous-dump"
   role   = "roles/storage.objectAdmin"
 
   members = ["serviceAccount:${google_service_account.dbdump_writer.email}"]
