@@ -74,7 +74,7 @@ module "gcloud_postgres" {
 
 module "athene2_dbsetup" {
   source    = "../../modules/dbsetup"
-  image     = "eu.gcr.io/serlo-shared/athene2-dbsetup-cronjob:3.1.2"
+  image     = "eu.gcr.io/serlo-shared/athene2-dbsetup-cronjob:4.0.0"
   namespace = kubernetes_namespace.api_namespace.metadata.0.name
   node_pool = module.cluster.node_pools.preemptible
   schedule  = "0 2 * * *"
@@ -88,7 +88,7 @@ module "athene2_dbsetup" {
     password = var.kpi_kpi_database_password_default
   }
   bucket = {
-    url                  = "gs://anonymous-data"
+    url                  = "gs://anonymous-dump"
     service_account_key  = module.gcloud_dbdump_reader.account_key
     service_account_name = module.gcloud_dbdump_reader.account_name
   }
