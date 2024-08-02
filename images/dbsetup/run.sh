@@ -24,9 +24,9 @@ done
 
 echo $GCLOUD_SERVICE_ACCOUNT_KEY >/tmp/service_account_key.json
 gcloud auth activate-service-account ${GCLOUD_SERVICE_ACCOUNT_NAME} --key-file /tmp/service_account_key.json
-newest_dump_uri=$(gsutil ls -l gs://anonymous-data | grep dump | sort -rk 2 | head -n 1 | awk '{ print $3 }')
+newest_dump_uri=$(gsutil ls -l gs://anonymous-dump | grep dump | sort -rk 2 | head -n 1 | awk '{ print $3 }')
 [ -z "$newest_dump_uri" ] && {
-    log_fatal "no database dump available in gs://anonymous-data"
+    log_fatal "no database dump available in anonymous db dump bucket"
     exit 1
 }
 newest_dump=$(basename $newest_dump_uri)

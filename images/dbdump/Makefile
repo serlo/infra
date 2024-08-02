@@ -4,7 +4,7 @@ local_image=serlo/$(image_name)
 # change version if you want to push a new image
 major_version=3
 minor_version=4
-patch_version=2
+patch_version=3
 version=$(major_version).$(minor_version).$(patch_version)
 
 include ../docker.mk

@@ -63,7 +63,7 @@ module "gcloud_postgres" {
 
 module "athene2-dbdump" {
   source    = "../../modules/dbdump"
-  image     = "eu.gcr.io/serlo-shared/athene2-dbdump-cronjob:3.4.2"
+  image     = "eu.gcr.io/serlo-shared/athene2-dbdump-cronjob:3.4.3"
   namespace = kubernetes_namespace.api_namespace.metadata.0.name
   node_pool = module.cluster.node_pools.non-preemptible
   schedule  = "0 0 * * *"
@@ -77,7 +77,7 @@ module "athene2-dbdump" {
     password = var.kpi_kpi_database_password_readonly
   }
   bucket = {
-    url                 = "gs://anonymous-data"
+    url                 = "gs://anonymous-dump"
     service_account_key = module.gcloud_dbdump_writer.account_key
   }
 }

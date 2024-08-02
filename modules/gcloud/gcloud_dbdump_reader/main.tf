@@ -8,7 +8,7 @@ resource "google_service_account_key" "dbdump_reader_key" {
 }
 
 resource "google_storage_bucket_iam_member" "dbdump_reader_binding" {
-  bucket = "anonymous-data"
+  bucket = "anonymous-dump"
   role   = "roles/storage.objectViewer"
   member = "serviceAccount:${google_service_account.dbdump_reader.email}"
 }
