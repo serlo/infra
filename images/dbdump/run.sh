@@ -54,6 +54,6 @@ cat <<EOF | gcloud auth activate-service-account --key-file=-
 ${BUCKET_SERVICE_ACCOUNT_KEY}
 EOF
 gsutil cp dump-*.zip "${BUCKET_URL}"
-log_info "latest dump ${BUCKET_URL} uploaded to serlo-shared"
+log_info "latest dump ${BUCKET_URL} uploaded"
 
 log_info "dump of serlo.org database - end"
