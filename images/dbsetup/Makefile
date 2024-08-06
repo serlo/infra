@@ -10,5 +10,9 @@ include ../docker.mk
 
 .PHONY: docker_build
 docker_build:
-	docker build --build-arg version=$(version) --build-arg git_revision=$(shell git log | head -n 1 | cut  -f 2 -d ' ') -t $(local_image) .
+	docker build --build-arg version=$(version) --build-arg git_revision=$(shell git log | head -n 1 | cut  -f 2 -d ' ') -t $(local_image):$(version) .
+
+echo-version:
+	@echo $(version)
+
 
