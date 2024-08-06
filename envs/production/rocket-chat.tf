@@ -23,7 +23,7 @@ module "rocket-chat" {
   app_replicas = 1
 
   mongodump = {
-    image         = "eu.gcr.io/serlo-shared/mongodb-tools-base:1.0.1"
+    image         = "ghcr.io/serlo/infra/mongodb-tools:1.0.1"
     schedule      = "0 0 * * *"
     bucket_prefix = local.project
   }
