@@ -74,7 +74,7 @@ module "gcloud_postgres" {
 
 module "athene2_dbsetup" {
   source    = "../../modules/dbsetup"
-  image     = "eu.gcr.io/serlo-shared/athene2-dbsetup-cronjob:4.0.0"
+  image     = "ghcr.io/serlo/infra/dbsetup:4.0.0"
   namespace = kubernetes_namespace.api_namespace.metadata.0.name
   node_pool = module.cluster.node_pools.preemptible
   schedule  = "0 2 * * *"
