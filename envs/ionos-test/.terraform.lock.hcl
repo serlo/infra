@@ -5,6 +5,7 @@ provider "registry.terraform.io/hashicorp/random" {
   version = "3.6.2"
   hashes = [
     "h1:VavG5unYCa3SYISMKF9pzc3718M0bhPlcbUZZGl7wuo=",
+    "h1:wmG0QFjQ2OfyPy6BB7mQ57WtoZZGGV07uAPQeDmIrAE=",
     "zh:0ef01a4f81147b32c1bea3429974d4d104bbc4be2ba3cfa667031a8183ef88ec",
     "zh:1bcd2d8161e89e39886119965ef0f37fcce2da9c1aca34263dd3002ba05fcb53",
     "zh:37c75d15e9514556a5f4ed02e1548aaa95c0ecd6ff9af1119ac905144c70c114",
@@ -24,6 +25,7 @@ provider "registry.terraform.io/ionos-cloud/ionoscloud" {
   version     = "6.5.0"
   constraints = "6.5.0"
   hashes = [
+    "h1:NYD7NEYujjXahPAqcFvIkFXiNEjmYfwVq29BfAwL/MU=",
     "h1:bvGIiJ09YikK2EncvSkJkE+q6uFIz3KfsBV9NcOpI9k=",
     "zh:0150cc1a9c69556b88d999ab80ba694aaecdc61da53767020f7a873c96d6f017",
     "zh:375fd4200cdc79ac5606fa43473d6d5a663f29e696f8a16d6ca56ea516842f6d",
