@@ -1,0 +1,37 @@
+name: Push mongodb-tools image
+on:
+  push:
+    paths:
+      - 'images/mongodb-tools/**'
+
+jobs:
+  docker-image:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get version from Makefile
+        id: get-version
+        run: |
+          cd images/mongodb-tools
+          VERSION=$(make echo-version)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+      - name: Check if image exists
+        id: check-image
+        run: |
+          IMAGE_EXISTS=$(docker manifest inspect ghcr.io/${{ github.repository }}/mongodb-tools:${{ steps.get-version.outputs.VERSION }} > /dev/null && echo "true" || echo "false")
+          echo "IMAGE_EXISTS=$IMAGE_EXISTS" >> $GITHUB_OUTPUT
+      - name: Log in to GitHub Container Registry
+        if: steps.check-image.outputs.IMAGE_EXISTS == 'false'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        if: steps.check-image.outputs.IMAGE_EXISTS == 'false'
+        run: |
+          cd images/mongodb-tools
+          make docker_build
+          docker tag serlo/mongodb-tools-base:${{ steps.get-version.outputs.VERSION }} ghcr.io/${{ github.repository }}/mongodb-tools:${{ steps.get-version.outputs.VERSION }}
+          docker push ghcr.io/${{ github.repository }}/mongodb-tools:${{ steps.get-version.outputs.VERSION }}
