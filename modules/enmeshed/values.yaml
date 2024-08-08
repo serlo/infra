@@ -25,7 +25,7 @@ config:
       enabled: true
       docs:
         enabled: false
-    webhooksV2:
+    webhooks:
       enabled: true
       webhooks:
         - triggers:
