@@ -50,3 +50,13 @@ config:
             headers:
               X-API-KEY: ${api_key}
             publishInterval: 5
+
+pod:
+  connector:
+    resources:
+      requests:             
+        cpu: 10m
+        memory: 80Mi
+      limits:
+        cpu: 20m
+        memory: 100Mi
