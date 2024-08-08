@@ -13,11 +13,11 @@ smtp:
   password: ${smtp_password}
 
 resources:
-  limits:
-    cpu: 1000m
-    memory: 2000Mi
   requests:
-    cpu: 750m
+    cpu: 50m
+    memory: 1000Mi
+  limits:
+    cpu: 100m
     memory: 1500Mi
 
 mongodb:
