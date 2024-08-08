@@ -32,7 +32,7 @@ resource "helm_release" "enmeshed_deployment" {
     templatefile(
       "${path.module}/values.yaml",
       {
-        mongodb_uri            = "mongodb://root:${random_password.mongodb_root_password.result}@mongodb:27017/?authSource=admin&readPreference=primary&ssl=false"
+        mongodb_uri            = "mongodb://root:${random_password.mongodb_root_password.result}@${helm_release.database.name}:27017/?authSource=admin&readPreference=primary&ssl=false"
         platform_client_id     = var.platform_client_id
         platform_client_secret = var.platform_client_secret
         transport_base_url     = var.transport_base_url
