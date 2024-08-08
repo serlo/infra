@@ -5,3 +5,10 @@ global:
   storageClass: standard
 auth:
   rootPassword: ${mongodb_root_password}
+resources:
+  requests:
+    cpu: 30m
+    memory: 300Mi
+  limits:
+    cpu: 50m
+    memory: 500Mi
