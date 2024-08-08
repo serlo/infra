@@ -44,10 +44,10 @@ resource "helm_release" "enmeshed_deployment" {
 }
 
 resource "helm_release" "database" {
-  name       = "mongodb"
+  name       = "enmeshed-mongodb"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mongodb"
-  version    = "15.6.18"
+  version    = "14.0.12"
   namespace  = var.namespace
 
   values = [
