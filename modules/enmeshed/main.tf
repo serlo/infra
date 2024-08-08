@@ -2,10 +2,6 @@ variable "namespace" {
   type = string
 }
 
-variable "chart_version" {
-  type = string
-}
-
 variable "platform_client_id" {
   type = string
 }
@@ -28,8 +24,8 @@ variable "transport_base_url" {
 
 resource "helm_release" "enmeshed_deployment" {
   name      = "enmeshed"
-  chart     = " oci://ghcr.io/nmshd/connector-helm-chart"
-  version   = var.chart_version
+  chart     = "oci://ghcr.io/nmshd/connector-helm-chart"
+  version   = "3.9.1"
   namespace = var.namespace
 
   values = [
