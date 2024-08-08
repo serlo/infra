@@ -47,7 +47,7 @@ resource "helm_release" "database" {
   name       = "mongodb"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mongodb"
-  version    = "14.0.12"
+  version    = "15.6.18"
   namespace  = var.namespace
 
   values = [
