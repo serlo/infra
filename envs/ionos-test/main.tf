@@ -30,12 +30,6 @@ data "ionoscloud_image" "lti_tool" {
   location = "us/las"
 }
 
-resource "ionoscloud_ipblock" "ipblock" {
-  location = ionoscloud_datacenter.serlo_datacenter.location
-  size     = 1
-  name     = "IP Block Example"
-}
-
 resource "ionoscloud_server" "lti_tool_server" {
   name              = "Server Example"
   datacenter_id     = ionoscloud_datacenter.serlo_datacenter.id
@@ -56,19 +50,6 @@ resource "ionoscloud_server" "lti_tool_server" {
     lan             = ionoscloud_lan.serlo_lan.id
     name            = "system"
     dhcp            = true
-    firewall_active = true
-    firewall_type   = "BIDIRECTIONAL"
-    ips             = [ionoscloud_ipblock.ipblock.ips[0]]
-    firewall {
-      protocol         = "TCP"
-      name             = "SSH"
-      port_range_start = 22
-      port_range_end   = 22
-      source_mac       = "00:0a:95:9d:68:17"
-      # source_ip         = ionoscloud_ipblock.ipblock.ips[2]
-      # target_ip         = ionoscloud_ipblock.ipblock.ips[3]
-      type = "EGRESS"
-    }
   }
 }
 
