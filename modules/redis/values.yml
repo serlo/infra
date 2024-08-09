@@ -8,11 +8,11 @@ master:
     "cloud.google.com/gke-nodepool": ${node_pool}
   resources:
     requests:
-      cpu: 200m
-      memory: 500Mi
+      cpu: 30m
+      memory: 400Mi
     limits:
-      cpu: 350m
-      memory: 1Gi
+      cpu: 50m
+      memory: 600Mi
 
 replica:
   replicaCount: 1
@@ -22,8 +22,8 @@ replica:
     "cloud.google.com/gke-nodepool": ${node_pool}
   resources:
     requests:
-      cpu: 200m
-      memory: 500Mi
+      cpu: 30m
+      memory: 400Mi
     limits:
-      cpu: 350m
-      memory: 1Gi
+      cpu: 50m
+      memory: 600Mi

@@ -116,6 +116,16 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
             name  = "SERLO_EDITOR_TESTING_SECRET"
             value = var.serlo_editor_testing_secret
           }
+          resources {
+            requests = {
+              cpu    = "20m"
+              memory = "200Mi"
+            }
+            limits = {
+              cpu    = "50m"
+              memory = "350Mi"
+            }
+          }
         }
       }
     }

@@ -215,9 +215,9 @@ kratos:
                 plaintext: http://${domain}/api/.ory/mail-templates/recovery/invalid/email.body.plaintext.gotmpl
 deployment:
   resources:
-    limits:
-      cpu: 80m
-      memory: 400Mi
     requests:
+      cpu: 20m
+      memory: 50Mi
+    limits:
       cpu: 40m
-      memory: 128Mi
+      memory: 100Mi

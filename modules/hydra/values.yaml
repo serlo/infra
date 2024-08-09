@@ -45,9 +45,9 @@ deployment:
     cloud.google.com/gke-nodepool: ${node_pool}
 
   resources:
-    limits:
-      cpu: 40m
-      memory: 128Mi
     requests:
-      cpu: 20m
-      memory: 64Mi
+      cpu: 1m
+      memory: 30Mi
+    limits:
+      cpu: 5m
+      memory: 50Mi
