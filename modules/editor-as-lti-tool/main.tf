@@ -1,6 +1,6 @@
 locals {
   name      = "editor-as-lti-tool"
-  image_tag = var.dev_mode ? "dev" : "latest"
+  image_tag = "0.0.1"
 
   lti_platform_url = "https://identityserver.itslearning.com"
 
@@ -71,7 +71,7 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
         }
 
         container {
-          image             = "eu.gcr.io/serlo-shared/editor-as-lti-tool:${local.image_tag}"
+          image             = "ghcr.io/serlo/serlo-editor-as-lti-tool:${local.image_tag}"
           name              = local.name
           image_pull_policy = "Always"
 
