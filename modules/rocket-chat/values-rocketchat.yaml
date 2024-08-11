@@ -14,10 +14,10 @@ smtp:
 
 resources:
   requests:
-    cpu: 50m
+    cpu: 350m
     memory: 1000Mi
   limits:
-    cpu: 100m
+    cpu: 700m
     memory: 1500Mi
 
 mongodb:
