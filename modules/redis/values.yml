@@ -22,8 +22,8 @@ replica:
     "cloud.google.com/gke-nodepool": ${node_pool}
   resources:
     requests:
-      cpu: 30m
+      cpu: 50m
       memory: 400Mi
     limits:
-      cpu: 50m
+      cpu: 100m
       memory: 600Mi
