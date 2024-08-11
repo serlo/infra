@@ -216,8 +216,8 @@ kratos:
 deployment:
   resources:
     requests:
-      cpu: 10m
+      cpu: 30m
       memory: 50Mi
     limits:
-      cpu: 30m
+      cpu: 50m
       memory: 100Mi
