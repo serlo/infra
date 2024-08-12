@@ -25,7 +25,7 @@ config:
       enabled: true
       docs:
         enabled: false
-    webhooksV2:
+    webhooks:
       enabled: true
       webhooks:
         - triggers:
@@ -50,3 +50,13 @@ config:
             headers:
               X-API-KEY: ${api_key}
             publishInterval: 5
+
+pod:
+  connector:
+    resources:
+      requests:             
+        cpu: 50m
+        memory: 200Mi
+      limits:
+        cpu: 100m
+        memory: 400Mi

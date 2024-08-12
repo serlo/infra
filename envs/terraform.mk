@@ -14,7 +14,10 @@ terraform_init: terraform_download_secrets
 	terraform init
 
 .PHONY: terraform_plan
-terraform_plan: terraform_download_secrets
+terraform_plan: terraform_download_secrets terraform_plan_without_downloading_secrets
+
+.PHONY: terraform_plan_without_downloading_secrets
+terraform_plan_without_downloading_secrets:
 	terraform fmt -recursive
 	terraform plan -var-file secrets/terraform-$(env_name).tfvars
 
@@ -23,19 +26,16 @@ terraform_apply: terraform_download_secrets terraform_apply_without_downloading_
 
 .PHONY: terraform_apply_without_downloading_secrets
 terraform_apply_without_downloading_secrets:
-	# just make sure we know what we are doing
 	terraform fmt -recursive
 	terraform apply -var-file secrets/terraform-$(env_name).tfvars
 
 .PHONY: terraform_destroy
 terraform_destroy:
-	# just make sure we know what we are doing
 	terraform fmt -recursive
 	terraform destroy -var-file secrets/terraform-$(env_name).tfvars
 
 .PHONY: terraform_download_secrets
 terraform_download_secrets:
-	#remove secrets and load latest secret from gcloud
 	rm -rf secrets
 	gsutil -m cp -R gs://$(gcloud_env_name)_terraform/secrets/ .
 
