@@ -40,7 +40,7 @@ module "mysql" {
   database_connection_name   = "${local.project}:${local.region}:${local.mysql_database_instance_name}"
   database_region            = local.region
   database_name              = "serlo"
-  database_tier              = "db-n1-standard-4"
+  database_tier              = "db-n1-standard-2"
   database_private_network   = module.cluster.network
   database_password_default  = var.athene2_database_password_default
   database_password_readonly = var.athene2_database_password_readonly
