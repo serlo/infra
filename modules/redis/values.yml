@@ -23,7 +23,7 @@ replica:
   resources:
     requests:
       cpu: 50m
-      memory: 400Mi
+      memory: 500Mi
     limits:
       cpu: 100m
-      memory: 600Mi
+      memory: 700Mi

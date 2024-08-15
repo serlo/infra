@@ -118,12 +118,12 @@ resource "kubernetes_deployment" "editor_as_lti_tool" {
           }
           resources {
             requests = {
-              cpu    = "20m"
+              cpu    = "5m"
               memory = "200Mi"
             }
             limits = {
-              cpu    = "50m"
-              memory = "350Mi"
+              cpu    = "10m"
+              memory = "300Mi"
             }
           }
         }
