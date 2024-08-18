@@ -2,7 +2,7 @@ locals {
   rocket_chat = {
     chart_versions = {
       rocketchat = "4.7.4"
-      mongodb    = "10.23.13"
+      mongodb    = "11.0.0"
     }
     image_tags = {
       rocketchat = "6.11.1"
