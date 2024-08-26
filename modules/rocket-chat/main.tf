@@ -3,7 +3,6 @@ locals {
 
   mongodb_uri       = "mongodb://rocket-chat:${random_password.mongodb_password.result}@rocket-chat-database-mongodb-0.rocket-chat-database-mongodb-headless,rocket-chat-database-mongodb-1.rocket-chat-database-mongodb-headless,rocket-chat-database-mongodb-arbiter-0.rocket-chat-database-mongodb-arbiter-headless:27017/rocket-chat-db?replicaSet=rs0"
   mongodb_oplog_uri = "mongodb://root:${random_password.mongodb_root_password.result}@rocket-chat-database-mongodb-0.rocket-chat-database-mongodb-headless,rocket-chat-database-mongodb-1.rocket-chat-database-mongodb-headless,rocket-chat-database-mongodb-arbiter-0.rocket-chat-database-mongodb-arbiter-headless:27017/local?replicaSet=rs0&authSource=admin"
-
 }
 
 resource "helm_release" "rocket-chat_deployment" {
