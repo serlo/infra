@@ -365,7 +365,7 @@ resource "kubernetes_deployment" "server" {
           resources {
             requests = {
               cpu    = "100m"
-              memory = "300Mi"
+              memory = "350Mi"
             }
             limits = {
               cpu    = "150m"
