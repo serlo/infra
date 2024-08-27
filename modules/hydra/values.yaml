@@ -21,6 +21,13 @@ hydra:
   autoMigrate: true
 
   config:
+    serve:
+      public:
+        request_log:
+          disable_for_health: true
+      admin:
+        request_log:
+          disable_for_health: true
     dsn: ${dsn}
     oidc:
       subject_identifiers:
@@ -46,8 +53,8 @@ deployment:
 
   resources:
     requests:
-      cpu: 10m
-      memory: 30Mi
-    limits:
       cpu: 20m
       memory: 50Mi
+    limits:
+      cpu: 30m
+      memory: 75Mi
