@@ -1,16 +1,3 @@
-terraform {
-  required_providers {
-    ionoscloud = {
-      source  = "ionos-cloud/ionoscloud"
-      version = "6.5.0"
-    }
-  }
-}
-
-provider "ionoscloud" {
-  # Configuration options
-}
-
 resource "ionoscloud_datacenter" "serlo_datacenter" {
   name     = "serlo_datacenter"
   location = "de/txl"
