@@ -28,6 +28,12 @@ resource "ionoscloud_lan" "serlo_uplink" {
   name          = "serlo_uplink"
 }
 
+resource "ionoscloud_ipblock" "serlo_ipblock" {
+  location            = ionoscloud_datacenter.serlo_datacenter.location
+  size                = 1
+  name = "serlo_ipblock"
+}
+
 data "ionoscloud_image" "lti_tool" {
   type        = "HDD"
   cloud_init  = "V1"
@@ -48,9 +54,6 @@ resource "ionoscloud_server" "lti_tool_server" {
     name      = "system"
     size      = 5
     disk_type = "SSD Standard"
-    # user_data         = "foo"
-    # bus               = "VIRTIO"
-    # availability_zone = "AUTO"
   }
   nic {
     lan             = ionoscloud_lan.serlo_lan.id
@@ -66,6 +69,7 @@ resource "ionoscloud_nic" "public_nic" {
   name            = "nic_public"
   dhcp            = true
   firewall_active = false
+  ips = [ ionoscloud_ipblock.serlo_ipblock.ips[0] ]
 }
 
 resource "ionoscloud_mongo_cluster" "serlo_mongo_cluster" {
@@ -84,7 +88,3 @@ resource "ionoscloud_mongo_cluster" "serlo_mongo_cluster" {
   }
   template_id = "6b78ea06-ee0e-4689-998c-fc9c46e781f6"
 }
-
-# resource "random_password" "server_password" {
-#   length           = 16
-# }
