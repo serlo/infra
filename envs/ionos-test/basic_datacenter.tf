@@ -1,24 +1,28 @@
+resource "ionoscloud_ipblock" "serlo_ipblock" {
+  location = ionoscloud_datacenter.serlo_datacenter.location
+  size     = 1
+  name     = "serlo_ipblock"
+}
+
+resource "ionoscloud_nic" "public_nic" {
+  server_id       = ionoscloud_server.lti_tool_server.id
+  datacenter_id   = ionoscloud_datacenter.serlo_datacenter.id
+  lan             = ionoscloud_lan.serlo_uplink.id
+  name            = "nic_public"
+  dhcp            = true
+  firewall_active = false
+  ips             = [ionoscloud_ipblock.serlo_ipblock.ips[0]]
+}
+
 resource "ionoscloud_datacenter" "serlo_datacenter" {
   name     = "serlo_datacenter"
   location = "de/txl"
-}
-
-resource "ionoscloud_lan" "serlo_lan" {
-  datacenter_id = ionoscloud_datacenter.serlo_datacenter.id
-  public        = false
-  name          = "serlo_lan"
 }
 
 resource "ionoscloud_lan" "serlo_uplink" {
   datacenter_id = ionoscloud_datacenter.serlo_datacenter.id
   public        = true
   name          = "serlo_uplink"
-}
-
-resource "ionoscloud_ipblock" "serlo_ipblock" {
-  location = ionoscloud_datacenter.serlo_datacenter.location
-  size     = 1
-  name     = "serlo_ipblock"
 }
 
 data "ionoscloud_image" "lti_tool" {
@@ -42,27 +46,19 @@ resource "ionoscloud_server" "lti_tool_server" {
     disk_type = "SSD Standard"
   }
   nic {
-    lan  = ionoscloud_lan.serlo_lan.id
+    lan  = ionoscloud_lan.serlo_uplink.id
     name = "system"
     dhcp = true
   }
 }
 
-resource "ionoscloud_nic" "public_nic" {
-  server_id       = ionoscloud_server.lti_tool_server.id
-  datacenter_id   = ionoscloud_datacenter.serlo_datacenter.id
-  lan             = ionoscloud_lan.serlo_uplink.id
-  name            = "nic_public"
-  dhcp            = true
-  firewall_active = false
-  ips             = [ionoscloud_ipblock.serlo_ipblock.ips[0]]
+resource "ionoscloud_lan" "serlo_lan" {
+  datacenter_id = ionoscloud_datacenter.serlo_datacenter.id
+  public        = false
+  name          = "serlo_lan"
 }
 
 resource "ionoscloud_mongo_cluster" "serlo_mongo_cluster" {
-  maintenance_window {
-    day_of_the_week = "Sunday"
-    time            = "09:00:00"
-  }
   mongodb_version = "5.0"
   instances       = 1
   display_name    = "serlo_mongo_cluster"
