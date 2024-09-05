@@ -1,9 +1,17 @@
+# Data center: like a phisical server location
+resource "ionoscloud_datacenter" "serlo_datacenter" {
+  name     = "serlo_datacenter"
+  location = "de/txl"
+}
+
+# IP block: range of IPs for internet
 resource "ionoscloud_ipblock" "serlo_ipblock" {
   location = ionoscloud_datacenter.serlo_datacenter.location
   size     = 1
   name     = "serlo_ipblock"
 }
 
+# Network Interface Card: a hardware that connects server to a network
 resource "ionoscloud_nic" "public_nic" {
   server_id       = ionoscloud_server.lti_tool_server.id
   datacenter_id   = ionoscloud_datacenter.serlo_datacenter.id
@@ -14,11 +22,7 @@ resource "ionoscloud_nic" "public_nic" {
   ips             = [ionoscloud_ipblock.serlo_ipblock.ips[0]]
 }
 
-resource "ionoscloud_datacenter" "serlo_datacenter" {
-  name     = "serlo_datacenter"
-  location = "de/txl"
-}
-
+# Local Area Network: as the name says, a network connecting computers
 resource "ionoscloud_lan" "serlo_uplink" {
   datacenter_id = ionoscloud_datacenter.serlo_datacenter.id
   public        = true
