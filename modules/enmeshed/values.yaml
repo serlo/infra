@@ -18,9 +18,6 @@ config:
     sync:
       enabled: true
       interval: 5
-    autoAcceptRelationshipCreationChanges:
-      enabled: false
-      responseContent:
     coreHttpApi:
       enabled: true
       docs:

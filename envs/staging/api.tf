@@ -98,6 +98,16 @@ module "api_server_ingress" {
   enable_cors = true
 }
 
+module "enmeshed" {
+  source                 = "../../modules/enmeshed"
+  namespace              = kubernetes_namespace.api_namespace.metadata.0.name
+  transport_base_url     = "https://nmshd-bkb.demo.meinbildungsraum.de/"
+  platform_client_id     = var.enmeshed_platform_client_id
+  platform_client_secret = var.enmeshed_platform_client_secret
+  api_url                = "https://api.${local.domain}"
+  api_key                = var.enmeshed_api_key
+}
+
 module "enmeshed_ingress" {
   source = "../../modules/ingress"
 

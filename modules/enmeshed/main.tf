@@ -25,7 +25,7 @@ variable "transport_base_url" {
 resource "helm_release" "enmeshed_deployment" {
   name      = "enmeshed"
   chart     = "oci://ghcr.io/nmshd/connector-helm-chart"
-  version   = "4.6.2"
+  version   = "6.1.0"
   namespace = var.namespace
 
   values = [
