@@ -123,3 +123,12 @@ resource "cloudflare_record" "cname_enmeshed" {
   type    = "CNAME"
   proxied = true
 }
+
+# asset-proxy
+resource "cloudflare_record" "cname_asset_proxy" {
+  zone_id = var.zone_id
+  name    = "asset-proxy"
+  value   = var.domain
+  type    = "CNAME"
+  proxied = true
+}
