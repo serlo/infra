@@ -1,6 +1,6 @@
 resource "google_sql_database_instance" "db" {
   name             = var.database_instance_name
-  database_version = "POSTGRES_10_23"
+  database_version = "POSTGRES_11"
   region           = var.database_region
 
   lifecycle {
