@@ -109,6 +109,7 @@ kratos:
               default_browser_return_url: https://${domain}/auth/login
 
         registration:
+          enable_legacy_one_step: true
           lifespan: 10m
           ui_url: https://${domain}/auth/registration
           after:
