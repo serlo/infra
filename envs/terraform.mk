@@ -29,11 +29,6 @@ terraform_apply_without_downloading_secrets:
 	terraform fmt -recursive
 	terraform apply -var-file secrets/terraform-$(env_name).tfvars
 
-.PHONY: terraform_destroy
-terraform_destroy:
-	terraform fmt -recursive
-	terraform destroy -var-file secrets/terraform-$(env_name).tfvars
-
 .PHONY: terraform_download_secrets
 terraform_download_secrets:
 	rm -rf secrets
