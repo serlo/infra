@@ -18,13 +18,14 @@ ifeq ($(minor_version),)
 $(error minor_version not defined)
 endif
 
+local_name = serlo/$(image_name)
 remote_image_name := ghcr.io/serlo/infra/$(image_name)
 
 patch_version ?= $(shell git log --pretty=format:'' | wc -l)
 
 .PHONY: docker_build
 docker_build:
-	docker build --build-arg version=$(version) --build-arg git_revision=$(shell git log | head -n 1 | cut  -f 2 -d ' ') -t $(image_name):$(version) .
+	docker build --build-arg version=$(version) --build-arg git_revision=$(shell git log | head -n 1 | cut  -f 2 -d ' ') -t $(local_name):$(version) .
 
 .PHONY: docker_build_push
 docker_build_push:
@@ -32,7 +33,7 @@ docker_build_push:
 
 .PHONY: docker_push
 docker_push:
-	docker tag $(image_name):$(version) $(remote_image_name):$(version)
+	docker tag $(local_name):$(version) $(remote_image_name):$(version)
 	docker push $(remote_image_name):$(version)
 
 .PHONY: echo-version
