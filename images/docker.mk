@@ -35,6 +35,6 @@ docker_push:
 	docker tag $(image_name):$(version) $(remote_image_name):$(version)
 	docker push $(remote_image_name):$(version)
 
-.PHONY: docker_push
+.PHONY: echo-version
 echo-version:
 	@echo $(version)
