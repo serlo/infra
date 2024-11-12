@@ -63,7 +63,7 @@ module "gcloud_postgres" {
 
 module "athene2-dbdump" {
   source    = "../../modules/dbdump"
-  image     = "ghcr.io/serlo/infra/dbdump:3.4.4"
+  image     = "ghcr.io/serlo/infra/dbdump:3.4.5"
   namespace = kubernetes_namespace.api_namespace.metadata.0.name
   node_pool = module.cluster.node_pools.non-preemptible
   schedule  = "0 0 * * *"
