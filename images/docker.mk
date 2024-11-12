@@ -10,10 +10,6 @@ ifeq ($(version),)
 $(error version not defined)
 endif
 
-ifeq ($(local_image),)
-$(error local_image not defined)
-endif
-
 ifeq ($(major_version),)
 $(error major_version not defined)
 endif
@@ -22,23 +18,27 @@ ifeq ($(minor_version),)
 $(error minor_version not defined)
 endif
 
-image_name := ghcr.io/serlo/infra/$(image_name)
+remote_image_name := ghcr.io/serlo/infra/$(image_name)
 
 patch_version ?= $(shell git log --pretty=format:'' | wc -l)
 
+.PHONY: docker_build
+docker_build:
+	docker build --build-arg version=$(version) --build-arg git_revision=$(shell git log | head -n 1 | cut  -f 2 -d ' ') -t $(image_name):$(version) -t $(image_name):latest .
+
 .PHONY: docker_build_push
 docker_build_push:
-	 docker pull $(image_name):$(version) 2>/dev/null >/dev/null || $(MAKE) docker_build docker_push
+	 docker pull $(remote_image_name):$(version) 2>/dev/null >/dev/null || $(MAKE) docker_build docker_push
 
 .PHONY: docker_push
 docker_push:
-	docker tag $(local_image):latest $(image_name):latest
-	docker push $(image_name):latest
-	docker tag $(local_image):latest $(image_name):$(major_version)
-	docker push $(image_name):$(major_version)
-	docker tag $(local_image):latest $(image_name):$(major_version).$(minor_version)
-	docker push $(image_name):$(major_version).$(minor_version)
-	docker tag $(local_image):latest $(image_name):$(version)
-	docker push $(image_name):$(version)
-	docker tag $(local_image):latest $(image_name):sha-$(shell git describe --dirty --always)
-	docker push $(image_name):sha-$(shell git describe --dirty --always)
+	docker tag $(image_name):latest $(remote_image_name):latest
+	docker push $(remote_image_name):latest
+	docker tag $(image_name):latest $(remote_image_name):$(major_version)
+	docker push $(remote_image_name):$(major_version)
+	docker tag $(image_name):latest $(remote_image_name):$(major_version).$(minor_version)
+	docker push $(remote_image_name):$(major_version).$(minor_version)
+	docker tag $(image_name):latest $(remote_image_name):$(version)
+	docker push $(remote_image_name):$(version)
+	docker tag $(image_name):latest $(remote_image_name):sha-$(shell git describe --dirty --always)
+	docker push $(remote_image_name):sha-$(shell git describe --dirty --always)
