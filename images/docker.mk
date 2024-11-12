@@ -22,23 +22,23 @@ ifeq ($(minor_version),)
 $(error minor_version not defined)
 endif
 
-gce_image := eu.gcr.io/serlo-shared/$(image_name)
+image_name := ghcr.io/serlo/infra/$(image_name)
 
 patch_version ?= $(shell git log --pretty=format:'' | wc -l)
 
 .PHONY: docker_build_push
 docker_build_push:
-	 docker pull $(gce_image):$(version) 2>/dev/null >/dev/null || $(MAKE) docker_build docker_push
+	 docker pull $(image_name):$(version) 2>/dev/null >/dev/null || $(MAKE) docker_build docker_push
 
 .PHONY: docker_push
 docker_push:
-	docker tag $(local_image):latest $(gce_image):latest
-	docker push $(gce_image):latest
-	docker tag $(local_image):latest $(gce_image):$(major_version)
-	docker push $(gce_image):$(major_version)
-	docker tag $(local_image):latest $(gce_image):$(major_version).$(minor_version)
-	docker push $(gce_image):$(major_version).$(minor_version)
-	docker tag $(local_image):latest $(gce_image):$(version)
-	docker push $(gce_image):$(version)
-	docker tag $(local_image):latest $(gce_image):sha-$(shell git describe --dirty --always)
-	docker push $(gce_image):sha-$(shell git describe --dirty --always)
+	docker tag $(local_image):latest $(image_name):latest
+	docker push $(image_name):latest
+	docker tag $(local_image):latest $(image_name):$(major_version)
+	docker push $(image_name):$(major_version)
+	docker tag $(local_image):latest $(image_name):$(major_version).$(minor_version)
+	docker push $(image_name):$(major_version).$(minor_version)
+	docker tag $(local_image):latest $(image_name):$(version)
+	docker push $(image_name):$(version)
+	docker tag $(local_image):latest $(image_name):sha-$(shell git describe --dirty --always)
+	docker push $(image_name):sha-$(shell git describe --dirty --always)

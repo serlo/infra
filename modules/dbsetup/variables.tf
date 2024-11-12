@@ -3,7 +3,7 @@ variable "namespace" {
 }
 
 variable "image" {
-  default = "eu.gcr.io/serlo-shared/athene2-dbsetup-cronjob:latest"
+  default = "ghcr.io/serlo/infra/athene2-dbsetup-cronjob:latest"
 }
 
 variable "node_pool" {
