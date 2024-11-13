@@ -30,3 +30,11 @@ Docker and Make
 
 If you want to test the image just locally, use `make docker_build`.
 To publish an image just push to any branch after changing a version, and the CI is gone take care of it.
+
+### Common problems
+After upgrading kratos, there may be some changes in the database, like new tables.
+You may need to grant privileges again to the postgres users.
+```sql
+GRANT ALL PRIVILEGES ON DATABASE kratos TO serlo;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO serlo_readonly;
+```
