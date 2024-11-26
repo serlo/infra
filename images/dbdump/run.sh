@@ -27,7 +27,7 @@ mysql $mysql_connect --batch -e "SELECT id, CONCAT(@rn:=@rn+1, '@localhost') AS 
 
 log_info "dump kratos identities data"
 export PGPASSWORD=$POSTGRES_PASSWORD_READONLY
-pg_dump --host=${POSTGRES_HOST} --user=serlo_readonly --no-lock kratos >temp.sql
+pg_dump --host=${POSTGRES_HOST} --user=serlo_readonly kratos >temp.sql
 pg_ctl start -D /var/lib/postgresql/data
 psql --quiet -c "CREATE user serlo;"
 psql --quiet -c "CREATE user serlo_readonly;"
