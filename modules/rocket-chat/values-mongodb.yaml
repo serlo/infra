@@ -9,6 +9,8 @@ auth:
   password: ${mongodb_password}
   database: ${mongodb_database}
   replicaSetKey: ${mongodb_replica_set_key}
+readinessProbe:
+  timeoutSeconds: 20
 resources:
   requests:
     cpu: 200m
