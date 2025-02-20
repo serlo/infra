@@ -121,8 +121,8 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
                   memory = "1G"
                 }
                 requests = {
-                  cpu    = "575m"
-                  memory = "350M"
+                  cpu    = "600m"
+                  memory = "425M"
                 }
               }
             }
