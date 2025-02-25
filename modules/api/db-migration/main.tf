@@ -115,16 +115,6 @@ resource "kubernetes_cron_job_v1" "migration_cron_job" {
                   name = kubernetes_config_map.envvars.metadata.0.name
                 }
               }
-              resources {
-                limits = {
-                  cpu    = "1500m"
-                  memory = "1G"
-                }
-                requests = {
-                  cpu    = "600m"
-                  memory = "425M"
-                }
-              }
             }
 
             restart_policy = "Never"
