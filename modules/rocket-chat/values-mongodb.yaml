@@ -1,5 +1,7 @@
 image:
   tag: ${image_tag}
+extraFlags:
+  - "--wiredTigerCacheSizeGB=2"
 architecture: replicaset
 nodeSelector:
   cloud.google.com/gke-nodepool: ${node_pool}
