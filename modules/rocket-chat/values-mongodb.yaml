@@ -15,7 +15,7 @@ readinessProbe:
   timeoutSeconds: 20
 resources:
   requests:
-    cpu: 350m
+    cpu: 100m
     memory: 500Mi
   limits:
     cpu: 500m
