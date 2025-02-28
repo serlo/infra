@@ -14,7 +14,7 @@ smtp:
 
 resources:
   requests:
-    cpu: 300m
+    cpu: 150m
     memory: 1000Mi
   limits:
     cpu: 350m
