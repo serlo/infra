@@ -16,6 +16,9 @@ local buildEmail = function()
 
 local buildUsername = function()
   local preferredUsername = extractFromClaims('preferred_username');
+  preferredUsername = if std.length(preferredUsername) > 23
+                      then std.substr(preferredUsername, 0, 23)
+                      else preferredUsername;
 
   if preferredUsername != '' && preferredUsername != null
   then preferredUsername + '-' + enshortenUuid(uuid)
