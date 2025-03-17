@@ -17,8 +17,8 @@ local buildEmail = function()
 local buildUsername = function()
   local preferredUsername = extractFromClaims('preferred_username');
   local truncatedUsername = if std.length(preferredUsername) > 23
-                            then std.substr(preferredUsername, 0, 23)
-                            else preferredUsername;
+  then std.substr(preferredUsername, 0, 23)
+  else preferredUsername;
 
   if truncatedUsername != '' && truncatedUsername != null
   then truncatedUsername + '-' + enshortenUuid(uuid)
@@ -26,8 +26,8 @@ local buildUsername = function()
 
 local checkIfIsTeacher = function()
   local rawClaims = extractFromClaims('raw_claims');
-  
-  if 'rolle' in rawClaims then rawClaims['rolle'] == 'LEHR' else false;
+
+  if 'rolle' in rawClaims then rawClaims.rolle == 'LEHR' else false;
 
 if checkIfIsTeacher() then {
   identity: {
@@ -37,4 +37,4 @@ if checkIfIsTeacher() then {
       interest: 'other',
     },
   },
-} else error "ERR_BAD_ROLE"
+} else error 'ERR_BAD_ROLE'
