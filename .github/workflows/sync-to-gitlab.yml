@@ -11,6 +11,6 @@ jobs:
       - name: Sync to GitLab
         uses: kulla/sync-to-gitlab@v1
         with:
-          owner: stephan_kulla
-          repository_name: serlo-infra
+          owner: serlo
+          repository_name: infra
           token: ${{ secrets.GITLAB_TOKEN }}
